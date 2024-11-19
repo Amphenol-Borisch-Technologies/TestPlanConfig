@@ -228,7 +228,7 @@
     <xs:annotation>
       <xs:documentation xml:lang="en">
         <![CDATA[
-          MN element:
+          MI element:
           - Optional, 0 or more occurances.
           - Type: MethodInterval.
           - Returns: System.Double converted to System.String.
@@ -271,7 +271,7 @@
             - Required.
             - Type: xs:double.
                       
-            Low measurement limit, must be < High.
+            Low measurement limit, must be ≤ High.
             - Scientific notation permitted; for example, Low="-1.5E-2" for -0.015.
             - Low="-INF" disables lower limit; "-INF" = -∞.
           ]]>
@@ -286,7 +286,7 @@
             - Required.
             - Type: xs:double.
                       
-            High measurement limit, must be > Low.
+            High measurement limit, must be ≥ Low.
             - Scientific notation permitted; for example, High="1.5E2" for 150.
             - High="INF" disables upper limit; "INF" = +∞.
           ]]>
