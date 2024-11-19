@@ -2,7 +2,7 @@
 <TO xmlns:xsi ="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="T10.xsd"
     Folder="T10" Description="Example Test Operation.">
-  <TG Class="M1" Description="Example Test Group." CancelIfFail="true" Independent="true">
+  <TG Class="C1" Description="Example Test Group." CancelIfFail="true" Independent="true">
     <MC Method="M1" Description="Custom Power Method." CancelIfFail="true">
       <Parameter Key="Volts DC" Value="5V ± 5%"/>
       <Parameter Key="Amperes DC" Value="1.5 ± 10%"/>
