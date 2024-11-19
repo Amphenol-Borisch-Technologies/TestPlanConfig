@@ -51,6 +51,16 @@ class TestPlanConfig {
                 Console.WriteLine($"  Description     : {methodDescription}");
                 Console.WriteLine($"  Cancel If Fail  : {methodCancelIfFail}");
 
+                // TODO: Remove all validation code here that duplicates my XML schema 1.0 restrictions/validations.
+                // TODO: Add validation code here unavailable with XML schema 1.0.
+                // NOTE: If using XML schema 1.1, could benefit from xs:assert, to check that LowComparator ≤ HighComparator, etc.
+                // NOTE: Until can get an XML processor compatible with XML schema 1.1, must validate this and other criteria in this C# code instead.
+                //   NOTE: Microsoft Visual Studio 2022 only supports XML schema 1.0.
+                //   NOTE: Microsoft Visual Studio Code with Red Hat's XML extension only supports XML schema 1.0.
+                //     NOTE: Tried several other VS Code extensions, but they didn't support XML schema 1.1 either.
+                //   NOTE: Only XML processors that explicitly support XML schema 1.1 are expen$ive; Oxygen XML Editor, Altova XMLSpy, Saxon EE, Liquid XML Studio, etc.
+                // TODO: Use Activator.CreateInstance to auto-create appropriate TestMeasurement objects, eliminating below switch.
+                // TODO: Rename TestMeasurement objects to TestMethod objects?
                 switch(m) {
                     case METHODS.MC:
                         IEnumerable<XElement> parameters = method.Elements("Parameter");
