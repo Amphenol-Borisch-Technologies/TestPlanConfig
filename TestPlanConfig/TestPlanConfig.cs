@@ -73,6 +73,12 @@ class TestPlanConfig {
                     case METHODS.MI:
                         Double low = Double.Parse(method.Attribute("Low")?.Value);
                         Double high = Double.Parse(method.Attribute("High")?.Value);
+                        if (low > high) {
+                            throw new ArgumentException($"Invalid Method element {method.Name.LocalName}:{Environment.NewLine}" +
+                                $"Method      :{methodName}{Environment.NewLine}" +
+                                $"Description :{methodDescription}{Environment.NewLine}" +
+                                $"Invalidity  : Low '{low}' is > High '{high}'.{Environment.NewLine}");
+                        }
                         Int32 fd = Int32.Parse(method.Attribute("FD")?.Value);
                         String prefix = method.Attribute("Prefix")?.Value;
                         String units = method.Attribute("Units")?.Value;
