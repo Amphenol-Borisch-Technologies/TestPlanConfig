@@ -21,19 +21,19 @@ class TestPlanConfig {
 
     static void Main() {
         XDocument tocf = XDocument.Load(TEST_OPERATION_CONFIG_FILE);
-        XElement toElement = tocf.Element(Test.Operation) ?? throw new ArgumentException($"{Missing} root 'TO' element.");
-        String folder = (toElement.Attribute("Folder")?.Value) ?? throw new ArgumentException($"{Missing} 'Folder' attribute.");
-        String description = (toElement.Attribute("Description")?.Value) ?? throw new ArgumentException($"{Missing} 'Description' attribute.");
+        XElement toElement = tocf.Element(Test.Operation);
+        String folder = (toElement.Attribute("Folder")?.Value);
+        String description = (toElement.Attribute("Description")?.Value);
         Console.WriteLine($"Folder            : {folder}");
         Console.WriteLine($"Description       : {description}");
 
         IEnumerable<XElement> tgElements = toElement.Elements(Test.Group);
         foreach (XElement tg in tgElements) {
-            String tgClass = tg.Attribute("Class")?.Value ?? throw new ArgumentException($"{Missing} 'Class' attribute.");
-            String tgDescription = tg.Attribute("Description")?.Value ?? throw new ArgumentException($"{Missing} 'Description' attribute.");
+            String tgClass = tg.Attribute("Class")?.Value;
+            String tgDescription = tg.Attribute("Description")?.Value;
 
-            Boolean tgCancelIfFail = Boolean.Parse(tg.Attribute("CancelIfFail")?.Value ?? throw new ArgumentException($"{Missing} 'CancelIfFail' attribute."));
-            Boolean i = Boolean.Parse(tg.Attribute("Independent")?.Value ?? throw new ArgumentException($"{Missing} 'Independent' attribute."));
+            Boolean tgCancelIfFail = Boolean.Parse(tg.Attribute("CancelIfFail")?.Value;
+            Boolean i = Boolean.Parse(tg.Attribute("Independent")?.Value;
             Console.WriteLine($"\nTG Class          : {tgClass}");
             Console.WriteLine($"TG Description    : {tgDescription}");
             Console.WriteLine($"Cancel If Fail    : {tgCancelIfFail}");
@@ -42,9 +42,9 @@ class TestPlanConfig {
             IEnumerable<XElement> methods = tg.Elements();
             foreach (XElement method in methods) {
                 if (!Enum.TryParse(method.Name.LocalName, out METHODS m)) throw new ArgumentException($"Invalid Method element {method.Name.LocalName}.");
-                String methodName = method.Attribute("Method")?.Value ?? throw new ArgumentException($"{Missing} 'Method' attribute.");
-                String methodDescription = method.Attribute("Description")?.Value ?? throw new ArgumentException($"{Missing} 'Description' attribute.");
-                Boolean methodCancelIfFail = Boolean.Parse(method.Attribute("CancelIfFail")?.Value ?? throw new ArgumentException($"{Missing} 'CancelIfFail' attribute."));
+                String methodName = method.Attribute("Method")?.Value;
+                String methodDescription = method.Attribute("Description")?.Value;
+                Boolean methodCancelIfFail = Boolean.Parse(method.Attribute("CancelIfFail")?.Value;
 
                 Console.WriteLine($"\nMethod Type       : {m}");
                 Console.WriteLine($"  Method          : {methodName}");

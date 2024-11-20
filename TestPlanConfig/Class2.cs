@@ -17,7 +17,6 @@ public static class TestLib {
 
     public class Operation {
         public readonly String ID;
-        public readonly String Revision;
         public readonly String Description;
         public readonly String TestGroupIDs;
 
@@ -41,7 +40,6 @@ public static class TestLib {
 
     public class Group {
         public readonly String ID;
-        public readonly String Revision;
         public readonly String Description;
         public readonly Boolean Selectable;
         public readonly Boolean CancelNotPassed;
@@ -69,7 +67,6 @@ public static class TestLib {
 
     public class Measurement {
         public readonly String ID;
-        public readonly String Revision;
         public readonly String Description;
         public readonly String ClassName;
         public readonly Object ClassObject;

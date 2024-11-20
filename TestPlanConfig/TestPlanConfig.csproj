@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Class2.cs" />
+    <Compile Include="Class3.cs" />
     <Compile Include="Validation.cs" />
     <Compile Include="TestPlanConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +57,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="T10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XMLSchema1.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
