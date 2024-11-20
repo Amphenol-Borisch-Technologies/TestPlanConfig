@@ -224,6 +224,7 @@
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
+
   <xs:complexType name="MethodInterval">
     <xs:annotation>
       <xs:documentation xml:lang="en">
