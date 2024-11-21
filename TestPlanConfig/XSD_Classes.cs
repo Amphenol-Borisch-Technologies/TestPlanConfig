@@ -86,7 +86,7 @@ public class TO {
         [XmlAttributeAttribute()] public Double Low;
         [XmlAttributeAttribute()] public Double High;
         [XmlAttributeAttribute()] public MethodIntervalHighComparator HighComparator;
-        [XmlAttributeAttribute(DataType = "nonNegativeInteger")] public String FD;
+        [XmlAttributeAttribute(DataType = "nonNegativeInteger")] public UInt32 FD;
         [XmlAttributeAttribute()] public MethodIntervalPrefix Prefix;
         [XmlAttributeAttribute()] public MethodIntervalUnits Units;
         [XmlAttributeAttribute()] public MethodIntervalVA_Descriptor VA_Descriptor;
