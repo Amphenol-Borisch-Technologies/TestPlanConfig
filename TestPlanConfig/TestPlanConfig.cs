@@ -32,8 +32,8 @@ class TestPlanConfig {
             String tgClass = tg.Attribute("Class")?.Value;
             String tgDescription = tg.Attribute("Description")?.Value;
 
-            Boolean tgCancelIfFail = Boolean.Parse(tg.Attribute("CancelIfFail")?.Value;
-            Boolean i = Boolean.Parse(tg.Attribute("Independent")?.Value;
+            Boolean tgCancelIfFail = Boolean.Parse(tg.Attribute("CancelIfFail")?.Value);
+            Boolean i = Boolean.Parse(tg.Attribute("Independent")?.Value);
             Console.WriteLine($"\nTG Class          : {tgClass}");
             Console.WriteLine($"TG Description    : {tgDescription}");
             Console.WriteLine($"Cancel If Fail    : {tgCancelIfFail}");
@@ -44,7 +44,7 @@ class TestPlanConfig {
                 if (!Enum.TryParse(method.Name.LocalName, out METHODS m)) throw new ArgumentException($"Invalid Method element {method.Name.LocalName}.");
                 String methodName = method.Attribute("Method")?.Value;
                 String methodDescription = method.Attribute("Description")?.Value;
-                Boolean methodCancelIfFail = Boolean.Parse(method.Attribute("CancelIfFail")?.Value;
+                Boolean methodCancelIfFail = Boolean.Parse(method.Attribute("CancelIfFail")?.Value);
 
                 Console.WriteLine($"\nMethod Type       : {m}");
                 Console.WriteLine($"  Method          : {methodName}");

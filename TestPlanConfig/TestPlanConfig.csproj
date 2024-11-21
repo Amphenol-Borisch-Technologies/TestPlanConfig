@@ -62,12 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs" />
-    <Compile Include="Class3.cs" />
-    <Compile Include="t10.cs">
+    <Compile Include="Measurements.cs" />
+    <Compile Include="T10.cs">
       <DependentUpon>T10.xsd</DependentUpon>
     </Compile>
+    <Compile Include="TestLib.cs" />
     <Compile Include="Validation.cs" />
     <Compile Include="TestPlanConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
