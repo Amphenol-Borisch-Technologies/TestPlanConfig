@@ -77,9 +77,6 @@
     <None Include="T10.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="XMLSchema1.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="T10.xml" />
