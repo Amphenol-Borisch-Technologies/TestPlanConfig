@@ -17,7 +17,6 @@ class TestPlanConfig {
     }
 
     const String TEST_OPERATION_CONFIG_FILE = @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xml";
-    static readonly String Missing = $"Test Operation Config File '{TEST_OPERATION_CONFIG_FILE}' missing a";
 
     static void Main() {
         XDocument tocf = XDocument.Load(TEST_OPERATION_CONFIG_FILE);
