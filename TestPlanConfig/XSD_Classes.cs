@@ -33,8 +33,8 @@ public class TO {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public class MethodCustom {
-        [XmlElementAttribute("Parameter", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public MethodCustomParameter[] Parameter;
         [XmlAttributeAttribute(DataType = "ID")] public String Method;
+        [XmlElementAttribute("Parameter", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public MethodCustomParameter[] Parameter;
         [XmlAttributeAttribute()] public String Description;
         [XmlAttributeAttribute()] public Boolean CancelIfFail;
     }

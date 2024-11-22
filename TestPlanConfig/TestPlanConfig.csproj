@@ -74,6 +74,8 @@
     <None Include="App.config" />
     <None Include="T10.xsd">
       <SubType>Designer</SubType>
+      <Generator>LxCodeGenerator</Generator>
+      <LastGenOutput>T10.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
