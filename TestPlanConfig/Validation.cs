@@ -3,9 +3,9 @@ using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 
-static class Validator {
-    static Boolean xmlValid = true;
-    static StringBuilder messages = new StringBuilder();
+internal static class Validator {
+    private static Boolean xmlValid = true;
+    private static readonly StringBuilder messages = new StringBuilder();
 
     [STAThreadAttribute] 
     public static void Main() {
@@ -47,7 +47,7 @@ static class Validator {
         }
     }
 
-    static void ValidationCallback(Object sender, ValidationEventArgs vea) {
+    private static void ValidationCallback(Object sender, ValidationEventArgs vea) {
         xmlValid = false;
         messages.AppendLine($"Error:");
         messages.AppendLine($"  SourceUri     : {vea.Exception.SourceUri}");
