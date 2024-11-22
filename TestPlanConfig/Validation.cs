@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 
@@ -13,10 +15,28 @@ static class Validator {
         };
         settings.ValidationEventHandler += ValidationCallback;
         try {
-            using (XmlReader reader = XmlReader.Create(@"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xml", settings)) { while (reader.Read()) { } }
+            using (XmlReader reader = XmlReader.Create(@"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xml", settings)) {
+                Double low, high;
+                while (reader.Read()) {
+                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "MI") {
+                        low = Double.Parse(reader.GetAttribute("Low"));
+                        high = Double.Parse(reader.GetAttribute("High"));
+                        if (low > high) {
+                            StringBuilder sb = new StringBuilder();
+                            sb.AppendLine($"  MethodInterval's Low > High.");
+                            sb.AppendLine($"  Method        : {reader.GetAttribute("Method")}.");
+                            sb.AppendLine($"  Description   : {reader.GetAttribute("Description")}.");
+                            sb.AppendLine($"  Low           : {reader.GetAttribute("Low")}.");
+                            sb.AppendLine($"  High          : {reader.GetAttribute("High")}.");
+                            sb.AppendLine($"  Line Number   : {(reader as IXmlLineInfo).LineNumber}.");
+                            throw new Exception(sb.ToString());
+                        }
+                    }
+                }
+            }
         } catch (Exception ex) {
             xmlValid = false;
-            Console.WriteLine($"Error: {ex.Message}{Environment.NewLine}");
+            Console.WriteLine($"Error:{Environment.NewLine}{ex.Message}{Environment.NewLine}");
         }
 
         if (xmlValid) Console.WriteLine($"XML document is valid.{Environment.NewLine}");
@@ -25,12 +45,10 @@ static class Validator {
 
     static void ValidationCallback(Object sender, ValidationEventArgs vea) {
         xmlValid = false;
-        Console.WriteLine($"Source             : {vea.Exception.Source}");
-        Console.WriteLine($"SourceUri          : {vea.Exception.SourceUri}");
-        Console.WriteLine($"LineNumber         : {vea.Exception.LineNumber}");
-        Console.WriteLine($"LinePosition       : {vea.Exception.LinePosition}");
-        Console.WriteLine($"SourceSchemaObject : {vea.Exception.SourceSchemaObject}");
-        Console.WriteLine($"Severity           : {vea.Severity}");
-        Console.WriteLine($"Message            : {vea.Message}{Environment.NewLine}");
+        Console.WriteLine($"Error:");
+        Console.WriteLine($"  SourceUri     : {vea.Exception.SourceUri}");
+        Console.WriteLine($"  Line Number   : {vea.Exception.LineNumber}");
+        Console.WriteLine($"  Line Position : {vea.Exception.LinePosition}");
+        Console.WriteLine($"{vea.Message}{Environment.NewLine}");
     }
 }

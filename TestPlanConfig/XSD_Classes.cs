@@ -88,9 +88,11 @@ public class TO {
         [XmlAttributeAttribute()] public MethodIntervalHighComparator HighComparator;
         [XmlAttributeAttribute(DataType = "nonNegativeInteger")] public UInt32 FD;
         [XmlAttributeAttribute()] public MethodIntervalPrefix Prefix;
+        [XmlIgnoreAttribute()] public Boolean PrefixSpecified;
         [XmlAttributeAttribute()] public MethodIntervalUnits Units;
-        [XmlAttributeAttribute()] public MethodIntervalVA_Descriptor VA_Descriptor;
-        [XmlIgnoreAttribute()] public Boolean VA_DescriptorSpecified;
+        [XmlIgnoreAttribute()] public Boolean UnitsSpecified;
+        [XmlAttributeAttribute()] public MethodIntervalVoltAmpere VoltAmpere;
+        [XmlIgnoreAttribute()] public Boolean VoltAmpereSpecified;
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
@@ -106,15 +108,15 @@ public class TO {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
     [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalPrefix { peta, tera, giga, mega, kilo, hecto, deca, NONE, deci, centi, milli, micro, nano, pico, femto }
+    public enum MethodIntervalPrefix { peta, tera, giga, mega, kilo, hecto, deca, deci, centi, milli, micro, nano, pico, femto }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
     [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalUnits { NONE, Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
+    public enum MethodIntervalUnits { Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
     [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalVA_Descriptor { AC, DC, Peak, PP, RMS }
+    public enum MethodIntervalVoltAmpere { AC, DC, Peak, PP, RMS }
 }
