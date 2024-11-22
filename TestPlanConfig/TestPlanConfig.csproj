@@ -62,6 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="T10.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T10.xsd</DependentUpon>
+    </Compile>
     <Compile Include="XSD_Classes.cs" />
     <Compile Include="Measurements.cs" />
     <Compile Include="TestLib.cs" />
