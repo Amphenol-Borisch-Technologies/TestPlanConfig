@@ -367,7 +367,7 @@
                     <xs:enumeration value="kilo"/>
                     <xs:enumeration value="hecto"/>
                     <xs:enumeration value="deca"/>
-                    <xs:enumeration value=""/>
+                    <xs:enumeration value="NONE"/>
                     <xs:enumeration value="deci"/>
                     <xs:enumeration value="centi"/>
                     <xs:enumeration value="milli"/>
@@ -393,9 +393,9 @@
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
-                    <xs:enumeration value=""/>
+                    <xs:enumeration value="NONE"/>
                     <xs:enumeration value="Amperes"/>
-                    <xs:enumeration value="°Celcius"/>
+                    <xs:enumeration value="Celcius"/>
                     <xs:enumeration value="Farads"/>
                     <xs:enumeration value="Henries"/>
                     <xs:enumeration value="Hertz"/>
@@ -408,7 +408,7 @@
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="VA_Descriptor" use="optional">
+        <xs:attribute name="VA_Descriptor" use="optional" default="NONE">
             <xs:annotation>
                 <xs:documentation xml:lang="en">
                     <![CDATA[

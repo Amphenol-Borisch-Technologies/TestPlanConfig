@@ -106,12 +106,12 @@ public class TO {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
     [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalPrefix { peta, tera, giga, mega, kilo, hecto, deca, [XmlEnumAttribute("")] Item, deci, centi, milli, micro, nano, pico, femto }
+    public enum MethodIntervalPrefix { peta, tera, giga, mega, kilo, hecto, deca, NONE, deci, centi, milli, micro, nano, pico, femto }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
     [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalUnits { [XmlEnumAttribute("")] Item, Amperes, [XmlEnumAttribute("°Celcius")] Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
+    public enum MethodIntervalUnits { NONE, Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
