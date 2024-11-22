@@ -21,6 +21,14 @@ internal static class Validator {
                 Double low, high;
                 while (reader.Read()) {
                     if (reader.NodeType == XmlNodeType.Element && reader.Name == "MI") {
+                        // NOTE: This if block required because Microsoft Visual Studio only supports XML Schema 1.0.
+                        // - If Visual Studio supported XSD 1.1, then <xs:assert test="@Low le @High"/>
+                        //   would obviate this if block.
+                        // - XML Liquid Studio Community Edition supports XML Schema 1.1.
+                        // - Microsoft Visual Studio only supports XML schema 1.0.
+                        // - Microsoft Visual Studio Code with Red Hat's XML extension only supports XML schema 1.0.
+                        //   - Tried several other VS Code extensions, but they didn't support XML schema 1.1 either.
+                        // - XML Notepad only supports only supports XML schema 1.0.
                         low = Double.Parse(reader.GetAttribute("Low"));
                         high = Double.Parse(reader.GetAttribute("High"));
                         if (low > high) {
