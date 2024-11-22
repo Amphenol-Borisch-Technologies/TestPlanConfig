@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 
 static class Validator {
     static Boolean xmlValid = true;
-    static void Main() {
+    static StringBuilder messages = new StringBuilder();
+
+    [STAThreadAttribute] 
+    public static void Main() {
         XmlSchemaSet schemaSet = new XmlSchemaSet();
         schemaSet.Add(null, @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xsd");
         XmlReaderSettings settings = new XmlReaderSettings {
@@ -22,33 +24,35 @@ static class Validator {
                         low = Double.Parse(reader.GetAttribute("Low"));
                         high = Double.Parse(reader.GetAttribute("High"));
                         if (low > high) {
-                            StringBuilder sb = new StringBuilder();
-                            sb.AppendLine($"  MethodInterval's Low > High.");
-                            sb.AppendLine($"  Method        : {reader.GetAttribute("Method")}.");
-                            sb.AppendLine($"  Description   : {reader.GetAttribute("Description")}.");
-                            sb.AppendLine($"  Low           : {reader.GetAttribute("Low")}.");
-                            sb.AppendLine($"  High          : {reader.GetAttribute("High")}.");
-                            sb.AppendLine($"  Line Number   : {(reader as IXmlLineInfo).LineNumber}.");
-                            throw new Exception(sb.ToString());
+                            xmlValid = false;
+                            messages.AppendLine($"Error:");
+                            messages.AppendLine($"  MethodInterval's Low > High.");
+                            messages.AppendLine($"  Method        : {reader.GetAttribute("Method")}.");
+                            messages.AppendLine($"  Description   : {reader.GetAttribute("Description")}.");
+                            messages.AppendLine($"  Low           : {reader.GetAttribute("Low")}.");
+                            messages.AppendLine($"  High          : {reader.GetAttribute("High")}.");
+                            messages.AppendLine($"  Line Number   : {(reader as IXmlLineInfo).LineNumber}.{Environment.NewLine}");
                         }
                     }
                 }
             }
         } catch (Exception ex) {
             xmlValid = false;
-            Console.WriteLine($"Error:{Environment.NewLine}{ex.Message}{Environment.NewLine}");
+            messages.AppendLine($"Error:{Environment.NewLine}{ex.Message}{Environment.NewLine}");
         }
 
-        if (xmlValid) Console.WriteLine($"XML document is valid.{Environment.NewLine}");
-        else Console.WriteLine($"XML document is not valid.{Environment.NewLine}");
+        if (!xmlValid) {
+            messages.AppendLine($"XML document is not valid.{Environment.NewLine}");
+            CustomMessageBox.Show(messages.ToString());
+        }
     }
 
     static void ValidationCallback(Object sender, ValidationEventArgs vea) {
         xmlValid = false;
-        Console.WriteLine($"Error:");
-        Console.WriteLine($"  SourceUri     : {vea.Exception.SourceUri}");
-        Console.WriteLine($"  Line Number   : {vea.Exception.LineNumber}");
-        Console.WriteLine($"  Line Position : {vea.Exception.LinePosition}");
-        Console.WriteLine($"{vea.Message}{Environment.NewLine}");
+        messages.AppendLine($"Error:");
+        messages.AppendLine($"  SourceUri     : {vea.Exception.SourceUri}");
+        messages.AppendLine($"  Line Number   : {vea.Exception.LineNumber}");
+        messages.AppendLine($"  Line Position : {vea.Exception.LinePosition}");
+        messages.AppendLine($"{vea.Message}{Environment.NewLine}");
     }
 }

@@ -18,7 +18,9 @@ class TestPlanConfig {
 
     const String TEST_OPERATION_CONFIG_FILE = @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xml";
 
-    static void Main() {
+    
+    [STAThreadAttribute] 
+    public static void Main() {
         XDocument tocf = XDocument.Load(TEST_OPERATION_CONFIG_FILE);
         XElement toElement = tocf.Element(Test.Operation);
         String folder = (toElement.Attribute("Folder")?.Value);
@@ -50,14 +52,6 @@ class TestPlanConfig {
                 Console.WriteLine($"  Description     : {methodDescription}");
                 Console.WriteLine($"  Cancel If Fail  : {methodCancelIfFail}");
 
-                // TODO: Remove all validation code here that duplicates my XML schema 1.0 restrictions/validations.
-                // TODO: Add validation code here unavailable with XML schema 1.0.
-                // NOTE: If using XML schema 1.1, could benefit from xs:assert, to check that LowComparator ≤ HighComparator, etc.
-                // NOTE: Until can get an XML processor compatible with XML schema 1.1, must validate this and other criteria in this C# code instead.
-                //   NOTE: Microsoft Visual Studio 2022 only supports XML schema 1.0.
-                //   NOTE: Microsoft Visual Studio Code 1.95.3 with Red Hat's XML extension only supports XML schema 1.0.
-                //     NOTE: Tried several other VS Code extensions, but they didn't support XML schema 1.1 either.
-                //   NOTE: Only XML processors that explicitly support XML schema 1.1 are expen$ive; Oxygen XML Editor, Altova XMLSpy, Saxon EE, Liquid XML Studio, etc.
                 // TODO: Use Activator.CreateInstance to auto-create appropriate TestMeasurement objects, eliminating below switch.
                 // TODO: Rename TestMeasurement objects to TestMethod objects?
                 switch(m) {
@@ -81,13 +75,13 @@ class TestPlanConfig {
                         Int32 fd = Int32.Parse(method.Attribute("FD")?.Value);
                         String prefix = method.Attribute("Prefix")?.Value;
                         String units = method.Attribute("Units")?.Value;
-                        String vaDescriptor = method.Attribute("VA_Descriptor")?.Value;
+                        String voltAmpere = method.Attribute("VoltAmpere")?.Value;
                         Console.WriteLine($"    Low           : {low}");
                         Console.WriteLine($"    High          : {high}");
                         Console.WriteLine($"    FD            : {fd}");
                         Console.WriteLine($"    Prefix        : {prefix}");
                         Console.WriteLine($"    Units         : {units}");
-                        Console.WriteLine($"    VA Descriptor : {vaDescriptor}");
+                        Console.WriteLine($"    VoltAmpere    : {voltAmpere}");
                         break;
                     case METHODS.MP:
                         String path = method.Attribute("Path")?.Value;
