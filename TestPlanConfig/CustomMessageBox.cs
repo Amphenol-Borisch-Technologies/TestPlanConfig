@@ -1,45 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
-public class CustomMessageBox : Form {
-    private readonly TextBox messageTextBox;
-    private readonly Button copyButton;
+namespace TestSequencer {
+    public partial class CustomMessageBox : Form {
+        public CustomMessageBox() {
+            InitializeComponent();
+        }
 
-    public CustomMessageBox(String message) {
-        messageTextBox = new TextBox {
-            Multiline = true,
-            ScrollBars = ScrollBars.Vertical,
-            ReadOnly = true,
-            Dock = DockStyle.Fill,
-            Font = new Font("Lucida Console", SystemFonts.DefaultFont.Size),
-            Text = message
-        };
+        public static void Show(String Title, String Message, Icon OptionalIcon = null) {
+            CustomMessageBox cms = new CustomMessageBox {
+                Text = Title,
+                Icon = (OptionalIcon is null ? SystemIcons.Information : OptionalIcon),
 
-        copyButton = new Button {
-            Text = "Copy to clipboard",
-            Dock = DockStyle.Bottom,
-            Font = SystemFonts.MessageBoxFont,
-        };
-        copyButton.Click += CopyButton_Click;
+            };
+            cms.richTextBox.Text = Message;
+            cms.buttonClipboard.Focus();
+            cms.richTextBox.Select(0, 0);
+            cms.richTextBox.Refresh();
+            cms.Refresh();
+            cms.ShowDialog();
+        }
 
-        Controls.Add(messageTextBox);
-        Controls.Add(copyButton);
-        Icon = SystemIcons.Error;
-        Text = "XML Validation Error";
-        Size = new Size(800, 600);
-    }
-
-    private void CopyButton_Click(Object sender, EventArgs e) {
-        Clipboard.SetText(messageTextBox.Text);
-        MessageBox.Show("Text copied to clipboard!");
-    }
-
-    public static void Show(String message) {
-        CustomMessageBox customMessageBox = new CustomMessageBox(message);
-        customMessageBox.ShowDialog();
-        customMessageBox.copyButton.Focus();
-        customMessageBox.messageTextBox.Select(0,0);
-        customMessageBox.messageTextBox.Refresh();
+        private void ButtonClipboard_Click(Object sender, EventArgs e) { Clipboard.SetText(richTextBox.Text); }
     }
 }
