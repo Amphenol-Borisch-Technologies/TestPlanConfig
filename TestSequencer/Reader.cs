@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace TestSequencer {
-    class Sequencer {
+    class Reader {
         enum METHODS { MC, MI, MP, MT }
         private struct Test {
             internal const String Operation = "TO";
@@ -17,7 +17,7 @@ namespace TestSequencer {
             internal const String Textual = "MT";
         }
 
-        const String TEST_OPERATION_CONFIG_FILE = @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xml";
+        const String TEST_OPERATION_CONFIG_FILE = @"C:\Users\phils\source\repos\TestSequencer\TestSequencer\T10.xml";
 
 
         [STAThreadAttribute]

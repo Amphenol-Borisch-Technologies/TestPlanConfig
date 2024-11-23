@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TestSequencer.Validator</StartupObject>
+    <StartupObject>TestSequencer.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,23 +63,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Deserializer.cs" />
     <Compile Include="CustomMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CustomMessageBox.Designer.cs">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="XSD_Classes.cs" />
-    <Compile Include="Measurements.cs" />
-    <Compile Include="TestLib.cs" />
+    <Compile Include="SequencerClasses.cs" />
     <Compile Include="Validator.cs" />
-    <Compile Include="Sequencer.cs" />
+    <Compile Include="Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XSD_Classes_Original.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="T10.xsd">
+    <None Include="Sequencer.xsd">
       <SubType>Designer</SubType>
       <Generator>LxCodeGenerator</Generator>
       <LastGenOutput>T10.cs</LastGenOutput>

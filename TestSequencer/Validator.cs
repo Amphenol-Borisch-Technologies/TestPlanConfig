@@ -8,8 +8,8 @@ namespace TestSequencer {
     internal class Validator {
         private static Boolean xmlValid = true;
         private static readonly StringBuilder messages = new StringBuilder();
-        private static readonly String xmlFile = @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xml";
-        private static readonly String xsdFile = @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xsd";
+        private static readonly String xmlFile = @"C:\Users\phils\source\repos\TestSequencer\TestSequencer\T10.xml";
+        private static readonly String xsdFile = @"C:\Users\phils\source\repos\TestSequencer\TestSequencer\Sequencer.xsd";
         private static XmlReader reader;
 
         [STAThreadAttribute]
