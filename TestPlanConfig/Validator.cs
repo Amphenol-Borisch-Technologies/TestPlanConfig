@@ -85,9 +85,6 @@ namespace TestSequencer {
 
         private static void ValidationCallback(Object sender, ValidationEventArgs vea) {
             xmlValid = false;
-
-
-
             messages.AppendLine($"Validation Event:");
             messages.AppendLine($"  Line Number   : {vea.Exception.LineNumber}");
             messages.AppendLine($"  Line Position : {vea.Exception.LinePosition}");
