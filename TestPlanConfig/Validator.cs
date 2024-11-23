@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
@@ -24,16 +25,18 @@ namespace TestSequencer {
                 using (reader = XmlReader.Create(xmlFile, settings)) {
                     Double low, high;
                     while (reader.Read()) {
-                        if (reader.NodeType == XmlNodeType.Element && reader.Name == "MI") {
+                        Debug.Print($"{reader.NodeType}");
+                        if (reader.NodeType == XmlNodeType.Element && String.Equals(reader.Name, "MI")) {
                             // NOTE: This if block required because Microsoft's Visual Studio only supports XML Schema 1.0.
                             // - If Visual Studio supported XSD 1.1, then <xs:assert test="@Low le @High"/>  would obviate this block.
-                            // - Below NOTES compare some mainstream XML editing options.
+                            // - Below NOTES compare just some of the many mainstream XML editing options.
                             //
                             // NOTE: XML Liquid Studio Community Edition supports XML Schema 1.1.
                             // - Liquid Studio is a powerful but complex external XML editor.
                             // - It's co$t free and it's license permits commericial usage.
                             // - Confirmed it detects Low > High occurences via <xs:assert test="@Low le @High"/>.
                             // - Chose to not utilize Liquid Studio because it adds too much complexity at this time.
+                            //   - Non-community/non-co$t free editions are integrated into Visual Studio.
                             //
                             // NOTE: XML Notepad supports XML Schema 1.0.
                             // - XML Notepad is a powerful but simple external XML editor.
@@ -44,12 +47,13 @@ namespace TestSequencer {
                             // - It's co$t free and it's license permits commericial usage.
                             //   - Red Hat's XML extension provides XML Schema 1.0 support.
                             //   - Tried several other provider's XML extensions, but none supported XML schema 1.1.
+                            //   - XML editing integrated with Visual Studio Code is incredibly convenient.
                             //   - As a multi-purpose editor, can develop C# .Net applications.  Plus many other languages.
                             //
                             // NOTE: Visual Studio's supports XML Schema 1.0.
                             // - Visual Studio's integrated XML editor is powerful but complex.
-                            //   - Being integrated with Visual Studio is incredibly convenient however.
                             //   - Visual Studio isn't co$t free, but permits commercial use.
+                            //   - XML editing integrated with Visual Studio is incredibly convenient.
                             //   - As a multi-purpose editor, can develop C# .Net applications.  Plus many other languages.
                             low = Double.Parse(reader.GetAttribute("Low"));
                             high = Double.Parse(reader.GetAttribute("High"));
@@ -62,8 +66,7 @@ namespace TestSequencer {
                                 messages.AppendLine($"  Description   : {reader.GetAttribute("Description")}");
                                 messages.AppendLine($"  Method        : {reader.GetAttribute("Method")}");
                                 messages.AppendLine($"  Low           : {reader.GetAttribute("Low")}");
-                                messages.AppendLine($"  High          : {reader.GetAttribute("High")}");
-                                messages.AppendLine($"  XML           : {reader.ReadOuterXml()}{Environment.NewLine}");
+                                messages.AppendLine($"  High          : {reader.GetAttribute("High")}{Environment.NewLine}{Environment.NewLine}");
                             }
                         }
                     }
@@ -75,8 +78,8 @@ namespace TestSequencer {
             }
 
             if (!xmlValid) {
-                messages.AppendLine($"XML document invalid: file:///{xmlFile}.{Environment.NewLine}");
-                CustomMessageBox.Show(Title: "XML Document Invalid", Message: messages.ToString(), OptionalIcon: System.Drawing.SystemIcons.Error);
+                messages.AppendLine($"Invalid XML document: file:///{xmlFile}.{Environment.NewLine}");
+                CustomMessageBox.Show(Title: "Invalid XML document", Message: messages.ToString(), OptionalIcon: System.Drawing.SystemIcons.Error);
             }
         }
 
@@ -85,11 +88,10 @@ namespace TestSequencer {
             messages.AppendLine($"Validation Event:");
             messages.AppendLine($"  Line Number   : {vea.Exception.LineNumber}");
             messages.AppendLine($"  Line Position : {vea.Exception.LinePosition}");
-            messages.AppendLine($"  Severity      : {vea.Severity}");
             messages.AppendLine($"  Node Type     : {reader.NodeType}");
             messages.AppendLine($"  Description   : {reader.GetAttribute("Description")}");
-            messages.AppendLine($"  XML           : {reader.ReadOuterXml()}");
-            messages.AppendLine($"  Message       : {vea.Message}{Environment.NewLine}");
+            messages.AppendLine($"  Severity      : {vea.Severity}");
+            messages.AppendLine($"  Message       : {vea.Message}{Environment.NewLine}{Environment.NewLine}");
         }
     }
 }
