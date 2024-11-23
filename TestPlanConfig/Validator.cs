@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TestSequencer {
-    internal static class Validator {
+    internal class Validator {
         private static Boolean xmlValid = true;
         private static readonly StringBuilder messages = new StringBuilder();
         private static readonly String xmlFile = @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xml";
         private static readonly String xsdFile = @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xsd";
+        private static XmlReader reader;
 
         [STAThreadAttribute]
         public static void Main() {
@@ -22,7 +21,7 @@ namespace TestSequencer {
             };
             settings.ValidationEventHandler += ValidationCallback;
             try {
-                using (XmlReader reader = XmlReader.Create(xmlFile, settings)) {
+                using (reader = XmlReader.Create(xmlFile, settings)) {
                     Double low, high;
                     while (reader.Read()) {
                         if (reader.NodeType == XmlNodeType.Element && reader.Name == "MI") {
@@ -39,12 +38,15 @@ namespace TestSequencer {
                             if (low > high) {
                                 xmlValid = false;
                                 messages.AppendLine($"Error:");
-                                messages.AppendLine($"  MethodInterval's Low > High.");
-                                messages.AppendLine($"  Method        : {reader.GetAttribute("Method")}");
+                                messages.AppendLine($"  Line Number   : {(reader as IXmlLineInfo).LineNumber}");
+                                messages.AppendLine($"  Line Position : {(reader as IXmlLineInfo).LinePosition}");
+                                messages.AppendLine($"  Node Type     : {reader.NodeType}");
                                 messages.AppendLine($"  Description   : {reader.GetAttribute("Description")}");
+                                messages.AppendLine($"  Method        : {reader.GetAttribute("Method")}");
                                 messages.AppendLine($"  Low           : {reader.GetAttribute("Low")}");
                                 messages.AppendLine($"  High          : {reader.GetAttribute("High")}");
-                                messages.AppendLine($"  Line Number   : {(reader as IXmlLineInfo).LineNumber}{Environment.NewLine}");
+                                messages.AppendLine($"  XML           : {reader.ReadOuterXml()}");
+                                messages.AppendLine($"  Message       : MethodInterval's Low > High.{Environment.NewLine}");
                             }
                         }
                     }
@@ -63,10 +65,12 @@ namespace TestSequencer {
         private static void ValidationCallback(Object sender, ValidationEventArgs vea) {
             xmlValid = false;
             messages.AppendLine($"Error:");
-            messages.AppendLine($"  SourceUri     : {vea.Exception.SourceUri}");
             messages.AppendLine($"  Line Number   : {vea.Exception.LineNumber}");
             messages.AppendLine($"  Line Position : {vea.Exception.LinePosition}");
-            messages.AppendLine($"{vea.Message}{Environment.NewLine}");
+            messages.AppendLine($"  Node Type     : {reader.NodeType}");
+            messages.AppendLine($"  Description   : {reader.GetAttribute("Description")}");
+            messages.AppendLine($"  XML           : {reader.ReadOuterXml()}");
+            messages.AppendLine($"  Message       : {vea.Message}{Environment.NewLine}");
         }
     }
 }

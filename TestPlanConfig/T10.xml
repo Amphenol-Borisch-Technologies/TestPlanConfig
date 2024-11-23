@@ -12,13 +12,13 @@
     <!-- M3's Expected return value of 0 corresponds to Executable ipecmd.exe completing successfully. ipecmd.exe returns 1 when failing.-->
     <MT Method="M4" Description="Verify Firmware Revision Text." CancelIfFail="true" Text="7.10" />
   </TG>
-  <TG Class="T20" Description="Rinse and Repeat." CancelIfFail="true" Independent="true">
+  <TG Class="T20" Description="Rinse and Repeat." CancelIfFail="blue" Independent="true">
     <MC Method="M5" Description="Custom Power Method." CancelIfFail="false">
       <Parameter Key="Volts DC" Value="5 ± 5%" />
       <Parameter Key="Amperes DC" Value="1.5 ± 10%" />
       <Parameter Key="Watts DC" Value="7.5375 ± 15%" />
     </MC>
-    <MI Method="M6" Description="+5VDC Interval Measurement." CancelIfFail="true" LowComparator="GE" Low="14.75" High="5.25" HighComparator="LE" FD="3"  Units="Volts" VoltAmpere="DC" />
+    <MI Method="M6" Description="+5VDC Interval Measurement." CancelIfFail="true" LowComparator="GE" Low="14.75" High="5.25" HighComparator="LE" FD="3" Units="Volts" VoltAmpere="DC" />
     <!-- M6's interval corresponds to 4.75 ≤ M6 ≤ 5.25, notated as [4.75, 5.25]. -->
     <MP Method="M7" Description="Programming Process." CancelIfFail="true" Path="C:\Program Files\Microchip\MPLABX\v6.15\mplab_platform\mplab_ipe" Executable="ipecmd.exe" Parameters="/P12LF1552 /E /M /Y /TPPK4 /F&quot;C:\Firmware\U2.hex&quot;" Expected="0" />
     <!-- M7's Expected return value of 0 corresponds to Executable ipecmd.exe completing successfully. ipecmd.exe returns 1 when failing.-->
