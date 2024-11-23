@@ -25,11 +25,9 @@ namespace TestSequencer {
                     while (reader.Read()) {
                         Debug.Print($"{reader.NodeType}");
                         if (reader.NodeType == XmlNodeType.Element && String.Equals(reader.Name, "MI")) {
-                            #region Verbose comment.
                             // NOTE: This if block required because Microsoft's Visual Studio only supports XML Schema 1.0.
-                            // - If Visual Studio supported XSD 1.1, then <xs:assert test="@Low le @High"/>  would obviate this block.
-                            // - Below NOTES compare just some of the many mainstream XML editing options.
-                            //
+                            // - If Visual Studio supported XSD 1.1, then <xs:assert test="@Low le @High"/> would obviate this block.
+                            #region TLDR below compares just some of the many mainstream XML editing options.
                             // NOTE: XML Liquid Studio Community Edition supports XML Schema 1.1.
                             // - Liquid Studio is a powerful but complex external XML editor.
                             // - It's co$t free and it's license permits commericial usage.
