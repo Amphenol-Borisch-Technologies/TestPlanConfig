@@ -47,6 +47,7 @@
             this.richTextBox.Size = new System.Drawing.Size(1343, 571);
             this.richTextBox.TabIndex = 2;
             this.richTextBox.Text = "";
+            this.richTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.RichTextBox_LinkClicked);
             // 
             // CustomMessageBox
             // 

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,13 +17,13 @@ namespace TestSequencer {
 
             };
             cms.richTextBox.Text = Message;
-            cms.buttonClipboard.Focus();
-            cms.richTextBox.Select(0, 0);
-            cms.richTextBox.Refresh();
-            cms.Refresh();
             cms.ShowDialog();
         }
 
         private void ButtonClipboard_Click(Object sender, EventArgs e) { Clipboard.SetText(richTextBox.Text); }
+
+        private void RichTextBox_LinkClicked(Object sender, LinkClickedEventArgs e) {
+            Process.Start(new ProcessStartInfo(e.LinkText) { UseShellExecute = true });
+        }
     }
 }

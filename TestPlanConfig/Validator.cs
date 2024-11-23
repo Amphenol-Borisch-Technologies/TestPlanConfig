@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TestSequencer {
     internal static class Validator {
@@ -53,7 +55,7 @@ namespace TestSequencer {
             }
 
             if (!xmlValid) {
-                messages.AppendLine($"XML document '{xmlFile}' invalid.{Environment.NewLine}");
+                messages.AppendLine($"XML document invalid: file:///{xmlFile}.{Environment.NewLine}");
                 CustomMessageBox.Show(Title: "XML Document Invalid", Message: messages.ToString(), OptionalIcon: System.Drawing.SystemIcons.Error);
             }
         }
