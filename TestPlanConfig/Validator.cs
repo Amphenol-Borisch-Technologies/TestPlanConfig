@@ -16,17 +16,16 @@ namespace TestSequencer {
         public static void Main() {
             XmlSchemaSet schemaSet = new XmlSchemaSet();
             schemaSet.Add(null, xsdFile);
-            XmlReaderSettings settings = new XmlReaderSettings {
-                ValidationType = ValidationType.Schema,
-                Schemas = schemaSet
-            };
+            XmlReaderSettings settings = new XmlReaderSettings { ValidationType = ValidationType.Schema, Schemas = schemaSet };
             settings.ValidationEventHandler += ValidationCallback;
+
             try {
                 using (reader = XmlReader.Create(xmlFile, settings)) {
                     Double low, high;
                     while (reader.Read()) {
                         Debug.Print($"{reader.NodeType}");
                         if (reader.NodeType == XmlNodeType.Element && String.Equals(reader.Name, "MI")) {
+                            #region Verbose comment.
                             // NOTE: This if block required because Microsoft's Visual Studio only supports XML Schema 1.0.
                             // - If Visual Studio supported XSD 1.1, then <xs:assert test="@Low le @High"/>  would obviate this block.
                             // - Below NOTES compare just some of the many mainstream XML editing options.
@@ -55,6 +54,7 @@ namespace TestSequencer {
                             //   - Visual Studio isn't co$t free, but permits commercial use.
                             //   - XML editing integrated with Visual Studio is incredibly convenient.
                             //   - As a multi-purpose editor, can develop C# .Net applications.  Plus many other languages.
+                            #endregion
                             low = Double.Parse(reader.GetAttribute("Low"));
                             high = Double.Parse(reader.GetAttribute("High"));
                             if (low > high) {
@@ -85,12 +85,16 @@ namespace TestSequencer {
 
         private static void ValidationCallback(Object sender, ValidationEventArgs vea) {
             xmlValid = false;
+
+
+
             messages.AppendLine($"Validation Event:");
             messages.AppendLine($"  Line Number   : {vea.Exception.LineNumber}");
             messages.AppendLine($"  Line Position : {vea.Exception.LinePosition}");
             messages.AppendLine($"  Node Type     : {reader.NodeType}");
             messages.AppendLine($"  Description   : {reader.GetAttribute("Description")}");
             messages.AppendLine($"  Severity      : {vea.Severity}");
+            messages.AppendLine($"  Attribute     : {reader.Name} = {reader.Value}");
             messages.AppendLine($"  Message       : {vea.Message}{Environment.NewLine}{Environment.NewLine}");
         }
     }
