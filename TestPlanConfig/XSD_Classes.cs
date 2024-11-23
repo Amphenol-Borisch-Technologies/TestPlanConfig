@@ -34,9 +34,9 @@ public class TO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public class MethodCustom {
         [XmlAttributeAttribute(DataType = "ID")] public String Method;
-        [XmlElementAttribute("Parameter", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public MethodCustomParameter[] Parameter;
         [XmlAttributeAttribute()] public String Description;
         [XmlAttributeAttribute()] public Boolean CancelIfFail;
+        [XmlElementAttribute("Parameter", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public MethodCustomParameter[] Parameter;
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]

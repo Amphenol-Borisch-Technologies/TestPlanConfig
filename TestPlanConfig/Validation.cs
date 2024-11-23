@@ -6,18 +6,20 @@ using System.Xml.Schema;
 internal static class Validator {
     private static Boolean xmlValid = true;
     private static readonly StringBuilder messages = new StringBuilder();
+    private static readonly String xmlFile = @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xml";
+    private static readonly String xsdFile = @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xsd";
 
     [STAThreadAttribute] 
     public static void Main() {
         XmlSchemaSet schemaSet = new XmlSchemaSet();
-        schemaSet.Add(null, @"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xsd");
+        schemaSet.Add(null, xsdFile);
         XmlReaderSettings settings = new XmlReaderSettings {
             ValidationType = ValidationType.Schema,
             Schemas = schemaSet
         };
         settings.ValidationEventHandler += ValidationCallback;
         try {
-            using (XmlReader reader = XmlReader.Create(@"C:\Users\phils\source\repos\TestPlanConfig\TestPlanConfig\T10.xml", settings)) {
+            using (XmlReader reader = XmlReader.Create(xmlFile, settings)) {
                 Double low, high;
                 while (reader.Read()) {
                     if (reader.NodeType == XmlNodeType.Element && reader.Name == "MI") {
@@ -35,11 +37,11 @@ internal static class Validator {
                             xmlValid = false;
                             messages.AppendLine($"Error:");
                             messages.AppendLine($"  MethodInterval's Low > High.");
-                            messages.AppendLine($"  Method        : {reader.GetAttribute("Method")}.");
-                            messages.AppendLine($"  Description   : {reader.GetAttribute("Description")}.");
-                            messages.AppendLine($"  Low           : {reader.GetAttribute("Low")}.");
-                            messages.AppendLine($"  High          : {reader.GetAttribute("High")}.");
-                            messages.AppendLine($"  Line Number   : {(reader as IXmlLineInfo).LineNumber}.{Environment.NewLine}");
+                            messages.AppendLine($"  Method        : {reader.GetAttribute("Method")}");
+                            messages.AppendLine($"  Description   : {reader.GetAttribute("Description")}");
+                            messages.AppendLine($"  Low           : {reader.GetAttribute("Low")}");
+                            messages.AppendLine($"  High          : {reader.GetAttribute("High")}");
+                            messages.AppendLine($"  Line Number   : {(reader as IXmlLineInfo).LineNumber}{Environment.NewLine}");
                         }
                     }
                 }
@@ -50,7 +52,7 @@ internal static class Validator {
         }
 
         if (!xmlValid) {
-            messages.AppendLine($"XML document is not valid.{Environment.NewLine}");
+            messages.AppendLine($"XML document '{xmlFile}' invalid.{Environment.NewLine}");
             CustomMessageBox.Show(messages.ToString());
         }
     }

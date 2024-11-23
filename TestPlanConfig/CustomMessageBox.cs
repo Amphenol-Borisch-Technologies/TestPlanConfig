@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 public class CustomMessageBox : Form {
-    private TextBox messageTextBox;
-    private Button copyButton;
+    private readonly TextBox messageTextBox;
+    private readonly Button copyButton;
 
     public CustomMessageBox(String message) {
         messageTextBox = new TextBox {
@@ -11,20 +12,22 @@ public class CustomMessageBox : Form {
             ScrollBars = ScrollBars.Vertical,
             ReadOnly = true,
             Dock = DockStyle.Fill,
+            Font = new Font("Lucida Console", SystemFonts.DefaultFont.Size),
             Text = message
         };
 
         copyButton = new Button {
-            Text = "Copy",
-            Dock = DockStyle.Bottom
+            Text = "Copy to clipboard",
+            Dock = DockStyle.Bottom,
+            Font = SystemFonts.MessageBoxFont,
         };
         copyButton.Click += CopyButton_Click;
 
         Controls.Add(messageTextBox);
         Controls.Add(copyButton);
-
-        Text = "Custom Message Box";
-        Size = new System.Drawing.Size(400, 300);
+        Icon = SystemIcons.Error;
+        Text = "XML Validation Error";
+        Size = new Size(800, 600);
     }
 
     private void CopyButton_Click(Object sender, EventArgs e) {
@@ -35,5 +38,8 @@ public class CustomMessageBox : Form {
     public static void Show(String message) {
         CustomMessageBox customMessageBox = new CustomMessageBox(message);
         customMessageBox.ShowDialog();
+        customMessageBox.copyButton.Focus();
+        customMessageBox.messageTextBox.Select(0,0);
+        customMessageBox.messageTextBox.Refresh();
     }
 }
