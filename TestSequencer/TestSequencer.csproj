@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TestSequencer.DeserializerXSD</StartupObject>
+    <StartupObject>TestSequencer.Deserializer</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

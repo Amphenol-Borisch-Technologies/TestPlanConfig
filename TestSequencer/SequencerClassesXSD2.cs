@@ -17,16 +17,12 @@ namespace TestSequencerXSD2 {
         [XmlAttribute("Description")] public String Description { get; set; }
         [XmlAttribute("CancelIfFail")] public Boolean CancelIfFail { get; set; }
         [XmlAttribute("Independent")] public Boolean Independent { get; set; }
-        [XmlChoiceIdentifier("MethodType")]
         [XmlElement("MC", typeof(MethodCustom))]
         [XmlElement("MI", typeof(MethodInterval))]
         [XmlElement("MP", typeof(MethodProcess))]
         [XmlElement("MT", typeof(MethodTextual))]
-        public List<Object> Methods { get; set; }
-        [XmlIgnore] public MethodTypes MethodType;
+        public List<MethodBase> Methods { get; set; }
     }
-
-    public enum MethodTypes { MC, MI, MP, MT }
 
     public abstract class MethodBase {
         [XmlAttribute("Method")] public String Method { get; set; }
@@ -50,11 +46,8 @@ namespace TestSequencerXSD2 {
         [XmlAttribute("HighComparator")] public MethodIntervalHighComparator HighComparator { get; set; }
         [XmlAttribute("FractionalDigits")] public UInt32 FractionalDigits { get; set; }
         [XmlAttribute("UnitPrefix")] public MethodIntervalUnitPrefix UnitPrefix { get; set; }
-        [XmlIgnore()] public Boolean UnitPrefixSpecified { get; set; }
         [XmlAttribute("Units")] public MethodIntervalUnits Units { get; set; }
-        [XmlIgnore()] public Boolean UnitsSpecified { get; set; }
         [XmlAttribute("UnitSuffix")] public MethodIntervalUnitSuffix UnitSuffix { get; set; }
-        [XmlIgnore()] public Boolean UnitSuffixSpecified { get; set; }
     }
 
     public class MethodProcess : MethodBase {
@@ -72,9 +65,9 @@ namespace TestSequencerXSD2 {
 
     public enum MethodIntervalHighComparator { LE, LT }
 
-    public enum MethodIntervalUnitPrefix { peta, tera, giga, mega, kilo, hecto, deca, deci, centi, milli, micro, nano, pico, femto }
+    public enum MethodIntervalUnitPrefix { NONE, peta, tera, giga, mega, kilo, hecto, deca, deci, centi, milli, micro, nano, pico, femto }
 
-    public enum MethodIntervalUnits { Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
+    public enum MethodIntervalUnits { NONE, Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
 
-    public enum MethodIntervalUnitSuffix { AC, DC, Peak, PP, RMS }
+    public enum MethodIntervalUnitSuffix { NONE, AC, DC, Peak, PP, RMS }
 }

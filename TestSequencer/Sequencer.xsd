@@ -274,12 +274,12 @@
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="UnitPrefix" use="optional">
+    <xs:attribute name="UnitPrefix" use="required">
       <xs:annotation>
         <xs:documentation xml:lang="en">
           <![CDATA[
             UnitPrefix attribute:
-            - Optional.
+            - Required.
             - Type: xs:string.
                       
             Subset of relevant System International prefixes from 1E+15 to 1E-15.
@@ -288,6 +288,7 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
+          <xs:enumeration value="NONE"/>
           <xs:enumeration value="peta"/>
           <xs:enumeration value="tera"/>
           <xs:enumeration value="giga"/>
@@ -305,12 +306,12 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="Units" use="optional">
+    <xs:attribute name="Units" use="required">
       <xs:annotation>
         <xs:documentation xml:lang="en">
           <![CDATA[
             Units attribute:
-            - Optional.
+            - Required.
             - Type: xs:string.
                       
             Subset of relevant System International derived units, incorrectly but usefully capitalized.
@@ -319,6 +320,7 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
+          <xs:enumeration value="NONE"/>
           <xs:enumeration value="Amperes"/>
           <xs:enumeration value="Celcius"/>
           <xs:enumeration value="Farads"/>
@@ -333,12 +335,12 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="UnitSuffix" use="optional">
+    <xs:attribute name="UnitSuffix" use="required">
       <xs:annotation>
         <xs:documentation xml:lang="en">
           <![CDATA[
             UnitSuffix attribute:
-            - Optional.
+            - Required.
             - Type: xs:string.
                       
             Relevant to Volt/Ampere Units.
@@ -347,6 +349,7 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
+          <xs:enumeration value="NONE"/>
           <xs:enumeration value="AC"/>
           <xs:enumeration value="DC"/>
           <xs:enumeration value="Peak"/>
