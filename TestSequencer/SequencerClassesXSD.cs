@@ -86,13 +86,13 @@ public class TO {
         [XmlAttributeAttribute()] public Double Low { get; set; }
         [XmlAttributeAttribute()] public Double High { get; set; }
         [XmlAttributeAttribute()] public MethodIntervalHighComparator HighComparator { get; set; }
-        [XmlAttributeAttribute(DataType = "nonNegativeInteger")] public UInt32 FD { get; set; }
-        [XmlAttributeAttribute()] public MethodIntervalPrefix Prefix { get; set; }
+        [XmlAttributeAttribute(DataType = "nonNegativeInteger")] public UInt32 FractionalDigits { get; set; }
+        [XmlAttributeAttribute()] public MethodIntervalUnitPrefix UnitPrefix { get; set; }
         [XmlIgnoreAttribute()] public Boolean PrefixSpecified { get; set; }
         [XmlAttributeAttribute()] public MethodIntervalUnits Units { get; set; }
         [XmlIgnoreAttribute()] public Boolean UnitsSpecified { get; set; }
-        [XmlAttributeAttribute()] public MethodIntervalVoltAmpere VoltAmpere { get; set; }
-        [XmlIgnoreAttribute()] public Boolean VoltAmpereSpecified { get; set; }
+        [XmlAttributeAttribute()] public MethodIntervalUnitSuffix UnitSuffix { get; set; }
+        [XmlIgnoreAttribute()] public Boolean UnitSuffixSpecified { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
@@ -108,7 +108,7 @@ public class TO {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
     [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalPrefix { peta, tera, giga, mega, kilo, hecto, deca, deci, centi, milli, micro, nano, pico, femto }
+    public enum MethodIntervalUnitPrefix { peta, tera, giga, mega, kilo, hecto, deca, deci, centi, milli, micro, nano, pico, femto }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
@@ -118,5 +118,5 @@ public class TO {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
     [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalVoltAmpere { AC, DC, Peak, PP, RMS }
+    public enum MethodIntervalUnitSuffix { AC, DC, Peak, PP, RMS }
 }

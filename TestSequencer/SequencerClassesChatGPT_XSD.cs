@@ -36,10 +36,10 @@ public class MethodInterval : MethodBase {
     [XmlAttribute("Low")] public Double Low { get; set; }
     [XmlAttribute("High")] public Double High { get; set; }
     [XmlAttribute("HighComparator")] public String HighComparator { get; set; }
-    [XmlAttribute("FD")] public UInt32 FractionalDigits { get; set; }
-    [XmlAttribute("Prefix")] public String Prefix { get; set; }
+    [XmlAttribute("FractionalDigits")] public UInt32 FractionalDigits { get; set; }
+    [XmlAttribute("UnitPrefix")] public String UnitPrefix { get; set; }
     [XmlAttribute("Units")] public String Units { get; set; }
-    [XmlAttribute("VoltAmpere")] public String VoltAmpere { get; set; }
+    [XmlAttribute("UnitSuffix")] public String UnitSuffix { get; set; }
 }
 
 public class MethodProcess : MethodBase {

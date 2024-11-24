@@ -65,6 +65,18 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:attribute name="Description" type="xs:string">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+        <![CDATA[
+            Description attribute:
+            - Required.
+            - Type: xs:string.
+        ]]>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  
   <xs:attributeGroup name="MethodAttributes">
     <xs:attribute name="Method" type="UniqueCSharpIdentifier" use="required">
       <xs:annotation>
@@ -92,18 +104,6 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
-  <xs:attribute name="Description" type="xs:string">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">
-        <![CDATA[
-            Description attribute:
-            - Required.
-            - Type: xs:string.
-        ]]>
-      </xs:documentation>
-    </xs:annotation>
-  </xs:attribute>
 
   <xs:complexType name="MethodCustom">
     <xs:annotation>
@@ -258,27 +258,27 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="FD" type="xs:nonNegativeInteger" use="required">
+    <xs:attribute name="FractionalDigits" type="xs:nonNegativeInteger" use="required">
       <xs:annotation>
         <xs:documentation xml:lang="en">
           <![CDATA[
-            FD attribute:
+            FractionalDigits attribute:
             - Required.
             - Type: xs:nonNegativeInteger.
                       
             Fractional Digits, measurement's rounding precision.
-            - FD="2" rounds 1.555 to 1.56.
-            - FD="1" rounds 1.555 to 1.6.
-            - FD="0" rounds 1.555 to 2.
+            - FractionalDigits="2" rounds 1.555 to 1.56.
+            - FractionalDigits="1" rounds 1.555 to 1.6.
+            - FractionalDigits="0" rounds 1.555 to 2.
           ]]>
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="Prefix" use="optional">
+    <xs:attribute name="UnitPrefix" use="optional">
       <xs:annotation>
         <xs:documentation xml:lang="en">
           <![CDATA[
-            Prefix attribute:
+            UnitPrefix attribute:
             - Optional.
             - Type: xs:string.
                       
@@ -333,15 +333,15 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="VoltAmpere" use="optional">
+    <xs:attribute name="UnitSuffix" use="optional">
       <xs:annotation>
         <xs:documentation xml:lang="en">
           <![CDATA[
-            VoltAmpere attribute:
+            UnitSuffix attribute:
             - Optional.
             - Type: xs:string.
                       
-            Further describes VoltAmpere Units.
+            Relevant to Volt/Ampere Units.
           ]]>
         </xs:documentation>
       </xs:annotation>
@@ -463,10 +463,9 @@
           <xs:field xpath="@Key"/>
         </xs:unique>
       </xs:element>
-      <xs:element name="MI" type="MethodInterval">
-      </xs:element>
-      <xs:element name="MP" type="MethodProcess"></xs:element>
-      <xs:element name="MT" type="MethodTextual"></xs:element>
+      <xs:element name="MI" type="MethodInterval"/>
+      <xs:element name="MP" type="MethodProcess"/>
+      <xs:element name="MT" type="MethodTextual"/>
     </xs:choice>
     <xs:attribute name="Class" type="UniqueCSharpIdentifier" use="required">
       <xs:annotation>

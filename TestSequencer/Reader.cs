@@ -70,16 +70,16 @@ namespace TestSequencer {
                                     $"Description :{methodDescription}{Environment.NewLine}" +
                                     $"Invalidity  : Low '{low}' is > High '{high}'.{Environment.NewLine}");
                             }
-                            Int32 fd = Int32.Parse(method.Attribute("FD")?.Value);
-                            String prefix = method.Attribute("Prefix")?.Value;
+                            Int32 fractionalDigits = Int32.Parse(method.Attribute("FractionalDigits")?.Value);
+                            String unitPrefix = method.Attribute("UnitPrefix")?.Value;
                             String units = method.Attribute("Units")?.Value;
-                            String voltAmpere = method.Attribute("VoltAmpere")?.Value;
+                            String unitSuffix = method.Attribute("UnitSuffix")?.Value;
                             Console.WriteLine($"    Low           : {low}");
                             Console.WriteLine($"    High          : {high}");
-                            Console.WriteLine($"    FD            : {fd}");
-                            Console.WriteLine($"    Prefix        : {prefix}");
+                            Console.WriteLine($"    FracDigits    : {fractionalDigits}");
+                            Console.WriteLine($"    UnitPrefix    : {unitPrefix}");
                             Console.WriteLine($"    Units         : {units}");
-                            Console.WriteLine($"    VoltAmpere    : {voltAmpere}");
+                            Console.WriteLine($"    UnitSuffix    : {unitSuffix}");
                             break;
                         case METHODS.MP:
                             String path = method.Attribute("Path")?.Value;
