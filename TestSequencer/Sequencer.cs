@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace TestSequencerXSD2 {
+namespace TestSequencer {
 
     [XmlRoot("TO")]
     public class TestOperation {
