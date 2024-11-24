@@ -16,7 +16,7 @@ namespace TestSequencer {
         static void PrintTO(TestOperation to) {
             Console.WriteLine($"Folder: {to.Folder}");
             Console.WriteLine($"Description: {to.Description}");
-            foreach (TestGroup tg in to.TGs) {
+            foreach (TestGroup tg in to.TestGroups) {
                 Console.WriteLine($"\nTG Class: {tg.Class}");
                 Console.WriteLine($"Description: {tg.Description}");
                 Console.WriteLine($"CancelIfFail: {tg.CancelIfFail}");

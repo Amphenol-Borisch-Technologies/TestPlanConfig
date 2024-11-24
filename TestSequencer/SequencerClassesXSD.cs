@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
@@ -7,116 +8,114 @@ using System.Xml.Serialization;
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [XmlTypeAttribute(AnonymousType = true)]
 [XmlRootAttribute(Namespace = "", IsNullable = false)]
-public class TO {
-    [XmlElementAttribute("TG", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public TestGroup[] TG;
-    [XmlAttributeAttribute(DataType = "ID")] public String Folder { get; set; }
-    [XmlAttributeAttribute()] public String Description { get; set; }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public class TestGroup {
-        [XmlElementAttribute("MC", typeof(MethodCustom), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [XmlElementAttribute("MI", typeof(MethodInterval), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [XmlElementAttribute("MP", typeof(MethodProcess), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [XmlElementAttribute("MT", typeof(MethodTextual), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Object[] Items { get; set; }
-        [XmlAttributeAttribute(DataType = "ID")] public String Class { get; set; }
-        [XmlAttributeAttribute()] public String Description { get; set; }
-        [XmlAttributeAttribute()] public Boolean CancelIfFail { get; set; }
-        [XmlAttributeAttribute()] public Boolean Independent { get; set; }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public class MethodCustom {
-        [XmlAttributeAttribute(DataType = "ID")] public String Method { get; set; }
-        [XmlAttributeAttribute()] public String Description { get; set; }
-        [XmlAttributeAttribute()] public Boolean CancelIfFail { get; set; }
-        [XmlElementAttribute("Parameter", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public MethodCustomParameter[] Parameter { get; set; }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [XmlTypeAttribute(AnonymousType = true)]
-    public class MethodCustomParameter {
-        [XmlAttributeAttribute()] public String Key { get; set; }
-        [XmlAttributeAttribute()] public String Value { get; set; }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public class MethodTextual {
-        [XmlAttributeAttribute(DataType = "ID")] public String Method { get; set; }
-        [XmlAttributeAttribute()] public String Description { get; set; }
-        [XmlAttributeAttribute()] public Boolean CancelIfFail { get; set; }
-        [XmlAttributeAttribute()] public String Text { get; set; }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public class MethodProcess {
-        [XmlAttributeAttribute(DataType = "ID")] public String Method { get; set; }
-        [XmlAttributeAttribute()] public String Description { get; set; }
-        [XmlAttributeAttribute()] public Boolean CancelIfFail { get; set; }
-        [XmlAttributeAttribute()] public String Path { get; set; }
-        [XmlAttributeAttribute()] public String Executable { get; set; }
-        [XmlAttributeAttribute()] public String Parameters { get; set; }
-        [XmlAttributeAttribute()] public String Expected { get; set; }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public class MethodInterval {
-        [XmlAttributeAttribute(DataType = "ID")] public String Method { get; set; }
-        [XmlAttributeAttribute()] public String Description { get; set; }
-        [XmlAttributeAttribute()] public Boolean CancelIfFail { get; set; }
-        [XmlAttributeAttribute()] public MethodIntervalLowComparator LowComparator { get; set; }
-        [XmlAttributeAttribute()] public Double Low { get; set; }
-        [XmlAttributeAttribute()] public Double High { get; set; }
-        [XmlAttributeAttribute()] public MethodIntervalHighComparator HighComparator { get; set; }
-        [XmlAttributeAttribute(DataType = "nonNegativeInteger")] public UInt32 FractionalDigits { get; set; }
-        [XmlAttributeAttribute()] public MethodIntervalUnitPrefix UnitPrefix { get; set; }
-        [XmlIgnoreAttribute()] public Boolean PrefixSpecified { get; set; }
-        [XmlAttributeAttribute()] public MethodIntervalUnits Units { get; set; }
-        [XmlIgnoreAttribute()] public Boolean UnitsSpecified { get; set; }
-        [XmlAttributeAttribute()] public MethodIntervalUnitSuffix UnitSuffix { get; set; }
-        [XmlIgnoreAttribute()] public Boolean UnitSuffixSpecified { get; set; }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalLowComparator { GE, GT }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalHighComparator { LE, LT }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalUnitPrefix { peta, tera, giga, mega, kilo, hecto, deca, deci, centi, milli, micro, nano, pico, femto }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalUnits { Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
-    [XmlTypeAttribute(AnonymousType = true)]
-    public enum MethodIntervalUnitSuffix { AC, DC, Peak, PP, RMS }
+public class TestOperation {
+    [XmlAttribute(DataType = "ID")] public String Folder { get; set; }
+    [XmlAttribute()] public String Description { get; set; }
+    [XmlElement("TG", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public List<TestGroup> TestGroups { get; set; }
 }
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public class TestGroup {
+    [XmlAttribute(DataType = "ID")] public String Class { get; set; }
+    [XmlAttribute()] public String Description { get; set; }
+    [XmlAttribute()] public Boolean CancelIfFail { get; set; }
+    [XmlAttribute()] public Boolean Independent { get; set; }
+    [XmlElement("MC", typeof(MethodCustom), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    [XmlElement("MI", typeof(MethodInterval), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    [XmlElement("MP", typeof(MethodProcess), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    [XmlElement("MT", typeof(MethodTextual), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    public List<MethodBase> Methods { get; set; }
+}
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public abstract class MethodBase {
+    [XmlAttribute(DataType = "ID")] public String Method { get; set; }
+    [XmlAttribute()] public String Description { get; set; }
+    [XmlAttribute()] public Boolean CancelIfFail { get; set; }
+}
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public class MethodCustom : MethodBase {
+    [XmlElement("Parameter", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public List<Parameter>[] Parameters { get; set; }
+}
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[XmlTypeAttribute(AnonymousType = true)]
+public class Parameter {
+    [XmlAttribute()] public String Key { get; set; }
+    [XmlAttribute()] public String Value { get; set; }
+}
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public class MethodInterval : MethodBase {
+    [XmlAttribute()] public MethodIntervalLowComparator LowComparator { get; set; }
+    [XmlAttribute()] public Double Low { get; set; }
+    [XmlAttribute()] public Double High { get; set; }
+    [XmlAttribute()] public MethodIntervalHighComparator HighComparator { get; set; }
+    [XmlAttribute(DataType = "nonNegativeInteger")] public UInt32 FractionalDigits { get; set; }
+    [XmlAttribute()] public MethodIntervalUnitPrefix UnitPrefix { get; set; }
+    [XmlIgnoreAttribute()] public Boolean PrefixSpecified { get; set; }
+    [XmlAttribute()] public MethodIntervalUnits Units { get; set; }
+    [XmlIgnoreAttribute()] public Boolean UnitsSpecified { get; set; }
+    [XmlAttribute()] public MethodIntervalUnitSuffix UnitSuffix { get; set; }
+    [XmlIgnoreAttribute()] public Boolean UnitSuffixSpecified { get; set; }
+}
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public class MethodProcess : MethodBase {
+    [XmlAttribute()] public String Path { get; set; }
+    [XmlAttribute()] public String Executable { get; set; }
+    [XmlAttribute()] public String Parameters { get; set; }
+    [XmlAttribute()] public String Expected { get; set; }
+}
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public class MethodTextual : MethodBase {
+    [XmlAttribute()] public String Text { get; set; }
+}
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[XmlTypeAttribute(AnonymousType = true)]
+public enum MethodIntervalLowComparator { GE, GT }
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[XmlTypeAttribute(AnonymousType = true)]
+public enum MethodIntervalHighComparator { LE, LT }
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[XmlTypeAttribute(AnonymousType = true)]
+public enum MethodIntervalUnitPrefix { peta, tera, giga, mega, kilo, hecto, deca, deci, centi, milli, micro, nano, pico, femto }
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[XmlTypeAttribute(AnonymousType = true)]
+public enum MethodIntervalUnits { Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
+
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+[System.SerializableAttribute()]
+[XmlTypeAttribute(AnonymousType = true)]
+public enum MethodIntervalUnitSuffix { AC, DC, Peak, PP, RMS }

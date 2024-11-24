@@ -31,6 +31,11 @@ public class MethodCustom : MethodBase {
     [XmlElement("Parameter")] public List<Parameter> Parameters { get; set; } = new List<Parameter>();
 }
 
+public class Parameter {
+    [XmlAttribute("Key")] public String Key { get; set; }
+    [XmlAttribute("Value")] public String Value { get; set; }
+}
+
 public class MethodInterval : MethodBase {
     [XmlAttribute("LowComparator")] public String LowComparator { get; set; }
     [XmlAttribute("Low")] public Double Low { get; set; }
@@ -53,7 +58,3 @@ public class MethodTextual : MethodBase {
     [XmlAttribute("Text")] public String Text { get; set; }
 }
 
-public class Parameter {
-    [XmlAttribute("Key")] public String Key { get; set; }
-    [XmlAttribute("Value")] public String Value { get; set; }
-}

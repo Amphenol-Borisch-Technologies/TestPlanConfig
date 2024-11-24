@@ -7,7 +7,7 @@ namespace TestSequencer {
     public class TestOperation {
         [XmlAttribute("Folder")] public String Folder { get; set; }
         [XmlAttribute("Description")] public String Description { get; set; }
-        [XmlElement("TG")] public List<TestGroup> TGs { get; set; }
+        [XmlElement("TG")] public List<TestGroup> TestGroups { get; set; }
     }
 
     public class TestGroup {
@@ -32,6 +32,11 @@ namespace TestSequencer {
         [XmlElement("Parameter")] public List<Parameter> Parameters { get; set; }
     }
 
+    public class Parameter {
+        [XmlAttribute("Key")] public String Key { get; set; }
+        [XmlAttribute("Value")] public String Value { get; set; }
+    }
+
     public class MethodInterval : MethodBase {
         [XmlAttribute("LowComparator")] public String LowComparator { get; set; }
         [XmlAttribute("Low")] public Double Low { get; set; }
@@ -52,10 +57,5 @@ namespace TestSequencer {
 
     public class MethodTextual : MethodBase {
         [XmlAttribute("Text")] public String Text { get; set; }
-    }
-
-    public class Parameter {
-        [XmlAttribute("Key")] public String Key { get; set; }
-        [XmlAttribute("Value")] public String Value { get; set; }
     }
 }
