@@ -9,8 +9,8 @@ using System.Xml.Serialization;
 [XmlRootAttribute(Namespace = "", IsNullable = false)]
 public class TO {
     [XmlElementAttribute("TG", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public TestGroup[] TG;
-    [XmlAttributeAttribute(DataType = "ID")] public String Folder;
-    [XmlAttributeAttribute()] public String Description;
+    [XmlAttributeAttribute(DataType = "ID")] public String Folder { get; set; }
+    [XmlAttributeAttribute()] public String Description { get; set; }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
@@ -21,11 +21,11 @@ public class TO {
         [XmlElementAttribute("MI", typeof(MethodInterval), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [XmlElementAttribute("MP", typeof(MethodProcess), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [XmlElementAttribute("MT", typeof(MethodTextual), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Object[] Items;
-        [XmlAttributeAttribute(DataType = "ID")] public String Class;
-        [XmlAttributeAttribute()] public String Description;
-        [XmlAttributeAttribute()] public Boolean CancelIfFail;
-        [XmlAttributeAttribute()] public Boolean Independent;
+        public Object[] Items { get; set; }
+        [XmlAttributeAttribute(DataType = "ID")] public String Class { get; set; }
+        [XmlAttributeAttribute()] public String Description { get; set; }
+        [XmlAttributeAttribute()] public Boolean CancelIfFail { get; set; }
+        [XmlAttributeAttribute()] public Boolean Independent { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
@@ -33,10 +33,10 @@ public class TO {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public class MethodCustom {
-        [XmlAttributeAttribute(DataType = "ID")] public String Method;
-        [XmlAttributeAttribute()] public String Description;
-        [XmlAttributeAttribute()] public Boolean CancelIfFail;
-        [XmlElementAttribute("Parameter", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public MethodCustomParameter[] Parameter;
+        [XmlAttributeAttribute(DataType = "ID")] public String Method { get; set; }
+        [XmlAttributeAttribute()] public String Description { get; set; }
+        [XmlAttributeAttribute()] public Boolean CancelIfFail { get; set; }
+        [XmlElementAttribute("Parameter", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)] public MethodCustomParameter[] Parameter { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
@@ -45,8 +45,8 @@ public class TO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [XmlTypeAttribute(AnonymousType = true)]
     public class MethodCustomParameter {
-        [XmlAttributeAttribute()] public String Key;
-        [XmlAttributeAttribute()] public String Value;
+        [XmlAttributeAttribute()] public String Key { get; set; }
+        [XmlAttributeAttribute()] public String Value { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
@@ -54,10 +54,10 @@ public class TO {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public class MethodTextual {
-        [XmlAttributeAttribute(DataType = "ID")] public String Method;
-        [XmlAttributeAttribute()] public String Description;
-        [XmlAttributeAttribute()] public Boolean CancelIfFail;
-        [XmlAttributeAttribute()] public String Text;
+        [XmlAttributeAttribute(DataType = "ID")] public String Method { get; set; }
+        [XmlAttributeAttribute()] public String Description { get; set; }
+        [XmlAttributeAttribute()] public Boolean CancelIfFail { get; set; }
+        [XmlAttributeAttribute()] public String Text { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
@@ -65,13 +65,13 @@ public class TO {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public class MethodProcess {
-        [XmlAttributeAttribute(DataType = "ID")] public String Method;
-        [XmlAttributeAttribute()] public String Description;
-        [XmlAttributeAttribute()] public Boolean CancelIfFail;
-        [XmlAttributeAttribute()] public String Path;
-        [XmlAttributeAttribute()] public String Executable;
-        [XmlAttributeAttribute()] public String Parameters;
-        [XmlAttributeAttribute()] public String Expected;
+        [XmlAttributeAttribute(DataType = "ID")] public String Method { get; set; }
+        [XmlAttributeAttribute()] public String Description { get; set; }
+        [XmlAttributeAttribute()] public Boolean CancelIfFail { get; set; }
+        [XmlAttributeAttribute()] public String Path { get; set; }
+        [XmlAttributeAttribute()] public String Executable { get; set; }
+        [XmlAttributeAttribute()] public String Parameters { get; set; }
+        [XmlAttributeAttribute()] public String Expected { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
@@ -79,20 +79,20 @@ public class TO {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public class MethodInterval {
-        [XmlAttributeAttribute(DataType = "ID")] public String Method;
-        [XmlAttributeAttribute()] public String Description;
-        [XmlAttributeAttribute()] public Boolean CancelIfFail;
-        [XmlAttributeAttribute()] public MethodIntervalLowComparator LowComparator;
-        [XmlAttributeAttribute()] public Double Low;
-        [XmlAttributeAttribute()] public Double High;
-        [XmlAttributeAttribute()] public MethodIntervalHighComparator HighComparator;
-        [XmlAttributeAttribute(DataType = "nonNegativeInteger")] public UInt32 FD;
-        [XmlAttributeAttribute()] public MethodIntervalPrefix Prefix;
-        [XmlIgnoreAttribute()] public Boolean PrefixSpecified;
-        [XmlAttributeAttribute()] public MethodIntervalUnits Units;
-        [XmlIgnoreAttribute()] public Boolean UnitsSpecified;
-        [XmlAttributeAttribute()] public MethodIntervalVoltAmpere VoltAmpere;
-        [XmlIgnoreAttribute()] public Boolean VoltAmpereSpecified;
+        [XmlAttributeAttribute(DataType = "ID")] public String Method { get; set; }
+        [XmlAttributeAttribute()] public String Description { get; set; }
+        [XmlAttributeAttribute()] public Boolean CancelIfFail { get; set; }
+        [XmlAttributeAttribute()] public MethodIntervalLowComparator LowComparator { get; set; }
+        [XmlAttributeAttribute()] public Double Low { get; set; }
+        [XmlAttributeAttribute()] public Double High { get; set; }
+        [XmlAttributeAttribute()] public MethodIntervalHighComparator HighComparator { get; set; }
+        [XmlAttributeAttribute(DataType = "nonNegativeInteger")] public UInt32 FD { get; set; }
+        [XmlAttributeAttribute()] public MethodIntervalPrefix Prefix { get; set; }
+        [XmlIgnoreAttribute()] public Boolean PrefixSpecified { get; set; }
+        [XmlAttributeAttribute()] public MethodIntervalUnits Units { get; set; }
+        [XmlIgnoreAttribute()] public Boolean UnitsSpecified { get; set; }
+        [XmlAttributeAttribute()] public MethodIntervalVoltAmpere VoltAmpere { get; set; }
+        [XmlIgnoreAttribute()] public Boolean VoltAmpereSpecified { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
