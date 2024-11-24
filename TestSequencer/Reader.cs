@@ -19,7 +19,7 @@ namespace TestSequencer {
 
         [STAThreadAttribute]
         public static void Main() {
-            XDocument tocf = XDocument.Load(Properties.Resources.XSD_File);
+            XDocument tocf = XDocument.Load(Properties.Resources.XML_File);
             XElement toElement = tocf.Element(Test.Operation);
             String folder = (toElement.Attribute("Folder")?.Value);
             String description = (toElement.Attribute("Description")?.Value);

@@ -13,7 +13,7 @@ namespace TestSequencer {
         [STAThreadAttribute]
         public static void Main() {
             XmlSchemaSet schemaSet = new XmlSchemaSet();
-            schemaSet.Add(null, Properties.Resources.XML_File);
+            schemaSet.Add(null, Properties.Resources.XSD_File);
             XmlReaderSettings settings = new XmlReaderSettings { ValidationType = ValidationType.Schema, Schemas = schemaSet };
             settings.ValidationEventHandler += ValidationCallback;
 
