@@ -8,19 +8,17 @@ namespace TestSequencer {
     internal class Validator {
         private static Boolean xmlValid = true;
         private static readonly StringBuilder messages = new StringBuilder();
-        private static readonly String xmlFile = @"C:\Users\phils\source\repos\TestSequencer\TestSequencer\T10.xml";
-        private static readonly String xsdFile = @"C:\Users\phils\source\repos\TestSequencer\TestSequencer\Sequencer.xsd";
         private static XmlReader reader;
 
         [STAThreadAttribute]
         public static void Main() {
             XmlSchemaSet schemaSet = new XmlSchemaSet();
-            schemaSet.Add(null, xsdFile);
+            schemaSet.Add(null, Properties.Resources.XML_File);
             XmlReaderSettings settings = new XmlReaderSettings { ValidationType = ValidationType.Schema, Schemas = schemaSet };
             settings.ValidationEventHandler += ValidationCallback;
 
             try {
-                using (reader = XmlReader.Create(xmlFile, settings)) {
+                using (reader = XmlReader.Create(Properties.Resources.XML_File, settings)) {
                     Double low, high;
                     while (reader.Read()) {
                         Debug.Print($"{reader.NodeType}");
@@ -76,7 +74,7 @@ namespace TestSequencer {
             }
 
             if (!xmlValid) {
-                messages.AppendLine($"Invalid XML document: file:///{xmlFile}.{Environment.NewLine}");
+                messages.AppendLine($"Invalid XML document: file:///{Properties.Resources.XML_File}.{Environment.NewLine}");
                 CustomMessageBox.Show(Title: "Invalid XML document", Message: messages.ToString(), OptionalIcon: System.Drawing.SystemIcons.Error);
             }
         }

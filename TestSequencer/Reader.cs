@@ -17,12 +17,9 @@ namespace TestSequencer {
             internal const String Textual = "MT";
         }
 
-        const String TEST_OPERATION_CONFIG_FILE = @"C:\Users\phils\source\repos\TestSequencer\TestSequencer\T10.xml";
-
-
         [STAThreadAttribute]
         public static void Main() {
-            XDocument tocf = XDocument.Load(TEST_OPERATION_CONFIG_FILE);
+            XDocument tocf = XDocument.Load(Properties.Resources.XSD_File);
             XElement toElement = tocf.Element(Test.Operation);
             String folder = (toElement.Attribute("Folder")?.Value);
             String description = (toElement.Attribute("Description")?.Value);
