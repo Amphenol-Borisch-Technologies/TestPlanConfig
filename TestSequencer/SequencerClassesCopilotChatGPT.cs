@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace TestSequencerCopilot {
+namespace TestSequencerCopilotChatGPT {
     [XmlRoot("TO")]
     public class TestOperation {
         [XmlAttribute("Folder")] public String Folder { get; set; }
@@ -15,10 +15,10 @@ namespace TestSequencerCopilot {
         [XmlAttribute("Description")] public String Description { get; set; }
         [XmlAttribute("CancelIfFail")] public Boolean CancelIfFail { get; set; }
         [XmlAttribute("Independent")] public Boolean Independent { get; set; }
-        [XmlElement("MC", Type = typeof(MethodCustom))]
-        [XmlElement("MI", Type = typeof(MethodInterval))]
-        [XmlElement("MP", Type = typeof(MethodProcess))]
-        [XmlElement("MT", Type = typeof(MethodTextual))]
+        [XmlElement("MC", typeof(MethodCustom))]
+        [XmlElement("MI", typeof(MethodInterval))]
+        [XmlElement("MP", typeof(MethodProcess))]
+        [XmlElement("MT", typeof(MethodTextual))]
         public List<MethodBase> Methods { get; set; }
     }
 

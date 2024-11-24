@@ -18,10 +18,10 @@ namespace TestSequencerXSD2 {
         [XmlAttribute("CancelIfFail")] public Boolean CancelIfFail { get; set; }
         [XmlAttribute("Independent")] public Boolean Independent { get; set; }
         [XmlChoiceIdentifier("MethodType")]
-        [XmlElement("MC", Type = typeof(MethodCustom))]
-        [XmlElement("MI", Type = typeof(MethodInterval))]
-        [XmlElement("MP", Type = typeof(MethodProcess))]
-        [XmlElement("MT", Type = typeof(MethodTextual))]
+        [XmlElement("MC", typeof(MethodCustom))]
+        [XmlElement("MI", typeof(MethodInterval))]
+        [XmlElement("MP", typeof(MethodProcess))]
+        [XmlElement("MT", typeof(MethodTextual))]
         public List<Object> Methods { get; set; }
         [XmlIgnore] public MethodTypes MethodType;
     }
@@ -70,11 +70,11 @@ namespace TestSequencerXSD2 {
 
     public enum MethodIntervalLowComparator { GE, GT }
 
-   public enum MethodIntervalHighComparator { LE, LT }
+    public enum MethodIntervalHighComparator { LE, LT }
 
     public enum MethodIntervalUnitPrefix { peta, tera, giga, mega, kilo, hecto, deca, deci, centi, milli, micro, nano, pico, femto }
 
-   public enum MethodIntervalUnits { Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
+    public enum MethodIntervalUnits { Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
 
-     public enum MethodIntervalUnitSuffix { AC, DC, Peak, PP, RMS }
+    public enum MethodIntervalUnitSuffix { AC, DC, Peak, PP, RMS }
 }
