@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TestSequencer.Reader</StartupObject>
+    <StartupObject>TestSequencer.DeserializerCopilotXSDandXML</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SequencerClassesChatGPT_XSD.cs" />
     <Compile Include="DeserializerCopilotXSDandXML.cs" />
     <Compile Include="CustomMessageBox.cs">
       <SubType>Form</SubType>

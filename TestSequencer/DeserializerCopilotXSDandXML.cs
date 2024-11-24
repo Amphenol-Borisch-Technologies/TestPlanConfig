@@ -28,7 +28,7 @@ namespace TestSequencer {
                             Console.WriteLine($"    Parameter Key: {parameter.Key}, Value: {parameter.Value}");
                         }
                     } else if (method is MethodInterval mi) {
-                        Console.WriteLine($"    LowComparator: {mi.LowComparator}, Low: {mi.Low}, High: {mi.High}, HighComparator: {mi.HighComparator}, FD: {mi.FD}, Units: {mi.Units}, VoltAmpere: {mi.VoltAmpere}");
+                        Console.WriteLine($"    LowComparator: {mi.LowComparator}, Low: {mi.Low}, High: {mi.High}, HighComparator: {mi.HighComparator}, FD: {mi.FD}, Prefix: {mi.Prefix}, Units: {mi.Units}, VoltAmpere: {mi.VoltAmpere}");
                     } else if (method is MethodProcess mp) {
                         Console.WriteLine($"    Path: {mp.Path}, Executable: {mp.Executable}, Parameters: {mp.Parameters}, Expected: {mp.Expected}");
                     } else if (method is MethodTextual mt) {

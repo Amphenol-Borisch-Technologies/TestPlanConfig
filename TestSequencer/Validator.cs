@@ -21,25 +21,24 @@ namespace TestSequencer {
                 using (reader = XmlReader.Create(Properties.Resources.XML_File, settings)) {
                     Double low, high;
                     while (reader.Read()) {
-                        Debug.Print($"{reader.NodeType}");
                         if (reader.NodeType == XmlNodeType.Element && String.Equals(reader.Name, "MI")) {
                             // NOTE: This if block required because Microsoft's Visual Studio only supports XML Schema 1.0.
                             // - If Visual Studio supported XSD 1.1, then <xs:assert test="@Low le @High"/> would obviate this block.
                             #region TLDR below compares just some of the many mainstream XML editing options.
                             // NOTE: XML Liquid Studio Community Edition supports XML Schema 1.1.
                             // - Liquid Studio is a powerful but complex external XML editor.
-                            // - It's co$t free and it's license permits commericial usage.
+                            // - It's co$t free and licensing permits commericial usage.
                             // - Confirmed it detects Low > High occurences via <xs:assert test="@Low le @High"/>.
                             // - Chose to not utilize Liquid Studio because it adds too much complexity at this time.
                             //   - Non-community/non-co$t free editions are integrated into Visual Studio.
                             //
                             // NOTE: XML Notepad supports XML Schema 1.0.
                             // - XML Notepad is a powerful but simple external XML editor.
-                            // - It's co$t free and it's license permits commericial usage.
+                            // - It's co$t free and licensing permits commericial usage.
                             //
                             // NOTE: Visual Studio Code with Red Hat's XML extension supports XML Schema 1.0.
                             // - VS Code is a powerful but complex external multi-purpose editor.
-                            // - It's co$t free and it's license permits commericial usage.
+                            // - It's co$t free and licensing permits commericial usage.
                             //   - Red Hat's XML extension provides XML Schema 1.0 support.
                             //   - Tried several other provider's XML extensions, but none supported XML schema 1.1.
                             //   - XML editing integrated with Visual Studio Code is incredibly convenient.
@@ -47,7 +46,7 @@ namespace TestSequencer {
                             //
                             // NOTE: Visual Studio's supports XML Schema 1.0.
                             // - Visual Studio's integrated XML editor is powerful but complex.
-                            //   - Visual Studio isn't co$t free, but permits commercial use.
+                            //   - Visual Studio isn't co$t free, but licensing permits commercial use.
                             //   - XML editing integrated with Visual Studio is incredibly convenient.
                             //   - As a multi-purpose editor, can develop C# .Net applications.  Plus many other languages.
                             #endregion
