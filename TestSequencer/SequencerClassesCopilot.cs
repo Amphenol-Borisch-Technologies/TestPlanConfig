@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace TestSequencer {
+namespace TestSequencerCopilot {
     [XmlRoot("TO")]
     public class TestOperation {
         [XmlAttribute("Folder")] public String Folder { get; set; }
