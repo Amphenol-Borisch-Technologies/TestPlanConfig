@@ -4,8 +4,17 @@ using System.Xml.Linq;
 
 namespace TestSequencer {
     class Reader {
-
-        [STAThreadAttribute]
+        // TODO: Modify this to read the Test Operation XML sequence files and auto-generate a skeleton C# project.
+        // - Copy a standard template project into a folder auto-created based on CCA Number.
+        // - Auto-generate C# files, classes & methods from the Test Operation XML sequence files.
+        // - Include standard Debug.Assert statements for:
+        //   - TO/TestOperation Folder & Description attributes added to first method in TestOperation.
+        //     - Also list of TG/TestGroups in TestOperation.
+        //   - TG/TestGroup Class, Description, CancelIfFail, Independent attributes added to first method in TestGroup.
+        //     - Also list of {MC,MI,MP,MT) methods in TestGroup.
+        // - Potentially include external invocations to Keysight VEE or Python executables, if test developer selects these options.
+        // - Goal is to automate as much of the routine, standardized test generation as possible.
+        [STAThread]
         public static void Main() {
             XDocument tocf = XDocument.Load(Properties.Resources.XML_File);
             XElement toElement = tocf.Element("TO");
