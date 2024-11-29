@@ -61,7 +61,7 @@ namespace TestSequencer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\phils\source\repos\TestSequencer\TestSequencer\T10.xml.
+        ///   Looks up a localized string similar to C:\Users\phill\source\repos\TestPlanConfig\TestSequencer\T10.xml.
         /// </summary>
         internal static string XML_File {
             get {
@@ -70,7 +70,7 @@ namespace TestSequencer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\phils\source\repos\TestSequencer\TestSequencer\Sequencer.xsd.
+        ///   Looks up a localized string similar to C:\Users\phill\source\repos\TestPlanConfig\TestSequencer\Sequencer.xsd.
         /// </summary>
         internal static string XSD_File {
             get {
