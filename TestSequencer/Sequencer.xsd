@@ -478,8 +478,8 @@
             - Required.
             - Type: UniqueCSharpIdentifier.
           
-            Name of C# class in file in TestOperation's Folder.
-            - Note, class names are not file names, even if both can be identically named.
+            Name of C# class in file in TestOperation's Namespace.
+            - Note, Class names are not Windows File names, even if both can be identically named and are often conflated.
           ]]>
         </xs:documentation>
       </xs:annotation>
@@ -529,16 +529,16 @@
       <xs:sequence>
         <xs:element name="TG" type="TestGroup" minOccurs="1" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attribute name="Folder" type="UniqueCSharpIdentifier" use="required">
+      <xs:attribute name="Namespace" type="UniqueCSharpIdentifier" use="required">
         <xs:annotation>
           <xs:documentation xml:lang="en">
             <![CDATA[
-              Folder attribute:
+              Namespace attribute:
               - Required.
               - Type: UniqueCSharpIdentifier.
           
-              Name of Windows folder TestGroup's Class file resides in, less path.
-              - Note, file names are not class names, even if both can be identically named.
+              Name of C# Namespace TestGroup's Class file is a part of.
+              - Note, Namespaces are not Windows Folder names, even if both can be identically named and are often conflated.
             ]]>
           </xs:documentation>
         </xs:annotation>

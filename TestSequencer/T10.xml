@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Sequencer.xsd" Folder="T10" Description="Example Test Operation.">
+<TO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Sequencer.xsd" Namespace="T10" Description="Example Test Operation.">
   <TG Class="Class1" Description="Example Test Group." CancelIfFail="true" Independent="true">
     <MT Method="Method1" Description="Verify Firmware Revision Text." CancelIfFail="true" Text="7.10" />
     <MC Method="Method2" Description="Custom Power Method." CancelIfFail="true">

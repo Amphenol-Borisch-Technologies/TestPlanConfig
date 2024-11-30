@@ -18,9 +18,9 @@ namespace TestSequencer {
         public static void Main() {
             XDocument tocf = XDocument.Load(Properties.Resources.XML_File);
             XElement toElement = tocf.Element("TO");
-            String folder = (toElement.Attribute("Folder")?.Value);
+            String nameSpace = (toElement.Attribute("Namespace")?.Value);
             String description = (toElement.Attribute("Description")?.Value);
-            Console.WriteLine($"Folder            : {folder}");
+            Console.WriteLine($"Namespace         : {nameSpace}");
             Console.WriteLine($"Description       : {description}");
 
             IEnumerable<XElement> tgElements = toElement.Elements("TG");

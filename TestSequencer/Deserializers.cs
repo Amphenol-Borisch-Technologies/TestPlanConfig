@@ -14,7 +14,7 @@ namespace TestSequencer {
         }
 
         static void PrintTO(TestOperation to) {
-            Console.WriteLine($"Folder: {to.Folder}");
+            Console.WriteLine($"Namespace: {to.Namespace}");
             Console.WriteLine($"Description: {to.Description}");
             foreach (TestGroup tg in to.TestGroups) {
                 Console.WriteLine($"\nTG Class: {tg.Class}");

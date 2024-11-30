@@ -6,7 +6,7 @@ namespace TestSequencer {
 
     [XmlRoot("TO")]
     public class TestOperation {
-        [XmlAttribute("Folder")] public String Folder { get; set; }
+        [XmlAttribute("Namespace")] public String Namespace { get; set; }
         [XmlAttribute("Description")] public String Description { get; set; }
         [XmlElement("TG")] public List<TestGroup> TestGroups { get; set; }
 

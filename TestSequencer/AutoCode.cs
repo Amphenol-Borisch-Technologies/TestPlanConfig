@@ -16,7 +16,7 @@ namespace TestSequencer {
             xmlDoc.Load(Properties.Resources.XML_File);
 
             CodeCompileUnit compileUnit = new CodeCompileUnit();
-            CodeNamespace nameSpace = new CodeNamespace(xmlDoc.DocumentElement.Attributes["Folder"].Value);
+            CodeNamespace nameSpace = new CodeNamespace(xmlDoc.DocumentElement.Attributes["Namespace"].Value);
             _ = compileUnit.Namespaces.Add(nameSpace);
 
             nameSpace.Imports.Add(new CodeNamespaceImport("System"));
