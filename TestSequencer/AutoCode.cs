@@ -52,8 +52,8 @@ namespace TestSequencer {
             switch (method.Name) {
                 case "MC":
                     sb.Append("Debug.Assert(MethodCustom(");
-                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\",");
-                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\",");
+                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
+                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
                     foreach (XmlNode parameter in method.ChildNodes) {
                         if (parameter == method.FirstChild & parameter == method.LastChild) sb.Append($"Parameters: \"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}\"));");
                         if (parameter == method.FirstChild & parameter != method.LastChild) sb.Append($"Parameters: \"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}|");
@@ -63,30 +63,30 @@ namespace TestSequencer {
                     break;
                 case "MI":
                     sb.Append("Debug.Assert(MethodInterval(");
-                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\",");
-                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\",");
-                    sb.Append($"LowComparator: \"{E(method.Attributes["LowComparator"].Value)}\",");
-                    sb.Append($"Low: \"{E(method.Attributes["Low"].Value)}\",");
-                    sb.Append($"High: \"{E(method.Attributes["High"].Value)}\",");
-                    sb.Append($"HighComparator: \"{E(method.Attributes["HighComparator"].Value)}\",");
-                    sb.Append($"FractionalDigits: \"{E(method.Attributes["FractionalDigits"].Value)}\",");
-                    sb.Append($"UnitPrefix: \"{E(method.Attributes["UnitPrefix"].Value)}\",");
-                    sb.Append($"Units: \"{E(method.Attributes["Units"].Value)}\",");
+                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
+                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
+                    sb.Append($"LowComparator: \"{E(method.Attributes["LowComparator"].Value)}\", " );
+                    sb.Append($"Low: \"{E(method.Attributes["Low"].Value)}\", ");
+                    sb.Append($"High: \"{E(method.Attributes["High"].Value)}\", ");
+                    sb.Append($"HighComparator: \"{E(method.Attributes["HighComparator"].Value)}\", ");
+                    sb.Append($"FractionalDigits: \"{E(method.Attributes["FractionalDigits"].Value)}\", ");
+                    sb.Append($"UnitPrefix: \"{E(method.Attributes["UnitPrefix"].Value)}\", ");
+                    sb.Append($"Units: \"{E(method.Attributes["Units"].Value)}\", ");
                     sb.Append($"UnitSuffix: \"{E(method.Attributes["UnitSuffix"].Value)}\"));");
                     break;
                 case "MP":
                     sb.Append("Debug.Assert(MethodProcess(");
-                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\",");
-                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\",");
-                    sb.Append($"Path: \"{E(method.Attributes["Path"].Value)}\",");
-                    sb.Append($"Executable: \"{E(method.Attributes["Executable"].Value)}\",");
-                    sb.Append($"Parameters: \"{E(method.Attributes["Parameters"].Value)}\",");
+                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
+                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
+                    sb.Append($"Path: \"{E(method.Attributes["Path"].Value)}\", ");
+                    sb.Append($"Executable: \"{E(method.Attributes["Executable"].Value)}\", ");
+                    sb.Append($"Parameters: \"{E(method.Attributes["Parameters"].Value)}\", ");
                     sb.Append($"Expected: \"{E(method.Attributes["Expected"].Value)}\"));");
                     break;
                 case "MT":
                     sb.Append("Debug.Assert(MethodTextual(");
-                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\",");
-                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\",");
+                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
+                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
                     sb.Append($"Text: \"{E(method.Attributes["Text"].Value)}\"));");
                     break;
                 default:
