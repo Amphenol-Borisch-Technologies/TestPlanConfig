@@ -16,7 +16,11 @@ namespace TestSequencer {
 
             CodeCompileUnit compileUnit = new CodeCompileUnit();
             CodeNamespace nameSpace = new CodeNamespace(xmlDoc.DocumentElement.Attributes["Folder"].Value);
-            compileUnit.Namespaces.Add(nameSpace);
+            _ = compileUnit.Namespaces.Add(nameSpace);
+
+            nameSpace.Imports.Add(new CodeNamespaceImport("System"));
+            nameSpace.Imports.Add(new CodeNamespaceImport("System.Diagnostics"));
+            nameSpace.Imports.Add(new CodeNamespaceImport("static TestSequencer.MethodAssertions"));
 
             foreach (XmlNode group in xmlDoc.DocumentElement.ChildNodes) {
                 CodeTypeDeclaration classDeclaration = AddClass(nameSpace, group);
@@ -31,7 +35,7 @@ namespace TestSequencer {
                 IsClass = true,
                 TypeAttributes = System.Reflection.TypeAttributes.NotPublic | System.Reflection.TypeAttributes.Class,
             };
-            nameSpace.Types.Add(ctd);
+            _ = nameSpace.Types.Add(ctd);
             return ctd;
         }
 
@@ -43,53 +47,54 @@ namespace TestSequencer {
                 ReturnType = new CodeTypeReference(typeof(String))
             };
 
-            Debug.Print(method.Name);
             StringBuilder sb = new StringBuilder();
             switch (method.Name) {
                 case "MC":
-                    sb.AppendLine("Debug.Assert(MethodCustom(");
-                    sb.AppendLine($"Description      : \"{E(method.Attributes["Description"].Value)}\",");
-                    sb.AppendLine($"CancelIfFail     : \"{E(method.Attributes["CancelIfFail"].Value)}\",");
+                    sb.Append("Debug.Assert(MethodCustom(");
+                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\",");
+                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\",");
                     foreach (XmlNode parameter in method.ChildNodes) {
-                        if (parameter == method.FirstChild && parameter == method.LastChild) sb.AppendLine($"\"Key={E(parameter.Attributes["Key"].Value)}, Value={E(parameter.Attributes["Value"].Value)}\"));");
-                        if (parameter == method.FirstChild && parameter != method.LastChild) sb.AppendLine($"\"Key={E(parameter.Attributes["Key"].Value)}, Value={E(parameter.Attributes["Value"].Value)}\",");
-                        if (parameter != method.FirstChild && parameter == method.LastChild) sb.AppendLine($"\"Key={E(parameter.Attributes["Key"].Value)}, Value={E(parameter.Attributes["Value"].Value)}\"));");
+                        if (parameter == method.FirstChild & parameter == method.LastChild) sb.Append($"Parameters: \"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}\"));");
+                        if (parameter == method.FirstChild & parameter != method.LastChild) sb.Append($"Parameters: \"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}|");
+                        if (parameter != method.FirstChild & parameter == method.LastChild) sb.Append($"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}\"));");
+                        if (parameter != method.FirstChild & parameter != method.LastChild) sb.Append($"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}|");
                     }
                     break;
                 case "MI":
-                    sb.AppendLine("Debug.Assert(MethodInterval(");
-                    sb.AppendLine($"Description      : \"{E(method.Attributes["Description"].Value)}\",");
-                    sb.AppendLine($"CancelIfFail     : \"{E(method.Attributes["CancelIfFail"].Value)}\",");
-                    sb.AppendLine($"LowComparator    : \"{E(method.Attributes["LowComparator"].Value)}\",");
-                    sb.AppendLine($"Low              : \"{E(method.Attributes["Low"].Value)}\",");
-                    sb.AppendLine($"High             : \"{E(method.Attributes["High"].Value)}\",");
-                    sb.AppendLine($"HighComparator   : \"{E(method.Attributes["HighComparator"].Value)}\",");
-                    sb.AppendLine($"FractionalDigits : \"{E(method.Attributes["FractionalDigits"].Value)}\",");
-                    sb.AppendLine($"UnitPrefix       : \"{E(method.Attributes["UnitPrefix"].Value)}\",");
-                    sb.AppendLine($"Units            : \"{E(method.Attributes["Units"].Value)}\",");
-                    sb.AppendLine($"UnitSuffix       : \"{E(method.Attributes["UnitSuffix"].Value)}\"));");
+                    sb.Append("Debug.Assert(MethodInterval(");
+                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\",");
+                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\",");
+                    sb.Append($"LowComparator: \"{E(method.Attributes["LowComparator"].Value)}\",");
+                    sb.Append($"Low: \"{E(method.Attributes["Low"].Value)}\",");
+                    sb.Append($"High: \"{E(method.Attributes["High"].Value)}\",");
+                    sb.Append($"HighComparator: \"{E(method.Attributes["HighComparator"].Value)}\",");
+                    sb.Append($"FractionalDigits: \"{E(method.Attributes["FractionalDigits"].Value)}\",");
+                    sb.Append($"UnitPrefix: \"{E(method.Attributes["UnitPrefix"].Value)}\",");
+                    sb.Append($"Units: \"{E(method.Attributes["Units"].Value)}\",");
+                    sb.Append($"UnitSuffix: \"{E(method.Attributes["UnitSuffix"].Value)}\"));");
                     break;
                 case "MP":
-                    sb.AppendLine("Debug.Assert(MethodProcess(");
-                    sb.AppendLine($"Description      : \"{E(method.Attributes["Description"].Value)}\",");
-                    sb.AppendLine($"CancelIfFail     : \"{E(method.Attributes["CancelIfFail"].Value)}\",");
-                    sb.AppendLine($"Path             : \"{E(method.Attributes["Path"].Value)}\",");
-                    sb.AppendLine($"Executable       : \"{E(method.Attributes["Executable"].Value)}\",");
-                    sb.AppendLine($"Parameters       : \"{E(method.Attributes["Parameters"].Value)}\",");
-                    sb.AppendLine($"Expected         : \"{E(method.Attributes["Expected"].Value)}\"));");
+                    sb.Append("Debug.Assert(MethodProcess(");
+                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\",");
+                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\",");
+                    sb.Append($"Path: \"{E(method.Attributes["Path"].Value)}\",");
+                    sb.Append($"Executable: \"{E(method.Attributes["Executable"].Value)}\",");
+                    sb.Append($"Parameters: \"{E(method.Attributes["Parameters"].Value)}\",");
+                    sb.Append($"Expected: \"{E(method.Attributes["Expected"].Value)}\"));");
                     break;
                 case "MT":
-                    sb.AppendLine("Debug.Assert(MethodTextual(");
-                    sb.AppendLine($"Description      : \"{E(method.Attributes["Description"].Value)}\",");
-                    sb.AppendLine($"CancelIfFail     : \"{E(method.Attributes["CancelIfFail"].Value)}\",");
-                    sb.AppendLine($"Text             : \"{E(method.Attributes["Text"].Value)}\"));");
+                    sb.Append("Debug.Assert(MethodTextual(");
+                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\",");
+                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\",");
+                    sb.Append($"Text: \"{E(method.Attributes["Text"].Value)}\"));");
                     break;
                 default:
                     throw new NotImplementedException($"Method Type {method.Name} not implemented.");
 
             }
-            memberMethod.Statements.Add(new CodeSnippetStatement(sb.ToString()));
-            classDeclaration.Members.Add(memberMethod);
+            _ = memberMethod.Statements.Add(new CodeSnippetStatement(sb.ToString()));
+            _ = memberMethod.Statements.Add(new CodeSnippetStatement("return String.Empty;"));
+            _ = classDeclaration.Members.Add(memberMethod);
         }
 
         private static String E(String s) {
@@ -102,12 +107,12 @@ namespace TestSequencer {
         private static void GenerateCSharpCode(CodeCompileUnit compileUnit, String outputFileName) {
             CSharpCodeProvider provider = new CSharpCodeProvider();
             CodeGeneratorOptions options = new CodeGeneratorOptions {
-                BracingStyle = "C"
+                BlankLinesBetweenMembers = true,
+                BracingStyle = "Block",
+                IndentString = "    "
             };
 
-            using (StreamWriter sourceWriter = new StreamWriter(outputFileName)) {
-                provider.GenerateCodeFromCompileUnit(compileUnit, sourceWriter, options);
-            }
+            using (StreamWriter sourceWriter = new StreamWriter(outputFileName)) { provider.GenerateCodeFromCompileUnit(compileUnit, sourceWriter, options); }
         }
     }
 }
