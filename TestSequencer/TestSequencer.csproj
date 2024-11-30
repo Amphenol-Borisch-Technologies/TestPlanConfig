@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoCode.cs" />
+    <Compile Include="Generator.cs" />
     <Compile Include="GeneratedMethods.cs" />
     <Compile Include="MethodAssertions.cs" />
     <Compile Include="Sequencer.cs" />
