@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TestSequencer.XmlToCSharpMethods</StartupObject>
+    <StartupObject>TestSequencer.Generator</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -64,10 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Generator.cs" />
+    <Compile Include="GeneratorXML.cs" />
     <Compile Include="GeneratedMethods.cs" />
     <Compile Include="MethodAssertions.cs" />
     <Compile Include="Sequencer.cs" />
-    <Compile Include="Deserializers.cs" />
+    <Compile Include="Deserializer.cs" />
     <Compile Include="CustomMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>

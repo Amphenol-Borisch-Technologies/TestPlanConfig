@@ -2,37 +2,37 @@
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.IO;
-using System.Text;
-using System.Xml;
+using System.Xml.Serialization;
 using Microsoft.CSharp;
 
 namespace TestSequencer {
 
-    public class XmlToCSharpMethods {
-        private static String INDENTATION = "    ";
+    public static class Generator {
+        private const String INDENTATION = "    ";
 
         public static void Main() {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(Properties.Resources.XML_File);
+            XmlSerializer serializer = new XmlSerializer(typeof(TO));
+            FileStream fs = new FileStream(Properties.Resources.XML_File, FileMode.Open);
+            TO to = (TO)serializer.Deserialize(fs);
+            fs.Close(); fs.Dispose();
 
             CodeCompileUnit compileUnit = new CodeCompileUnit();
-            CodeNamespace nameSpace = new CodeNamespace(xmlDoc.DocumentElement.Attributes["Namespace"].Value);
+            CodeNamespace nameSpace = new CodeNamespace(to.Namespace);
             _ = compileUnit.Namespaces.Add(nameSpace);
 
             nameSpace.Imports.Add(new CodeNamespaceImport("System"));
             nameSpace.Imports.Add(new CodeNamespaceImport("System.Diagnostics"));
             nameSpace.Imports.Add(new CodeNamespaceImport("static TestSequencer.MethodAssertions"));
 
-            foreach (XmlNode group in xmlDoc.DocumentElement.ChildNodes) {
-                CodeTypeDeclaration classDeclaration = AddClass(nameSpace, group);
-                foreach (XmlNode method in group.ChildNodes) AddMethod(classDeclaration, method);
+            foreach (TG tg in to.TestGroups) {
+                CodeTypeDeclaration classDeclaration = AddClass(nameSpace, tg);
+                foreach (MethodBase mb in tg.Methods) AddMethod(classDeclaration, mb);
             }
-
             GenerateCSharpCode(compileUnit, @"C:\Users\phill\Source\Repos\TestPlanConfig\TestSequencer\GeneratedMethods.cs");
         }
 
-        private static CodeTypeDeclaration AddClass(CodeNamespace nameSpace, XmlNode group) {
-            CodeTypeDeclaration ctd = new CodeTypeDeclaration(group.Attributes["Class"].Value) {
+        private static CodeTypeDeclaration AddClass(CodeNamespace nameSpace, TG tg) {
+            CodeTypeDeclaration ctd = new CodeTypeDeclaration(tg.Class) {
                 IsClass = true,
                 TypeAttributes = System.Reflection.TypeAttributes.NotPublic | System.Reflection.TypeAttributes.Class,
             };
@@ -40,65 +40,18 @@ namespace TestSequencer {
             return ctd;
         }
 
-        private static void AddMethod(CodeTypeDeclaration classDeclaration, XmlNode method) {
-            if (method.NodeType == XmlNodeType.Comment) return;
-            CodeMemberMethod memberMethod = new CodeMemberMethod {
-                Name = method.Attributes["Method"].Value,
+        private static void AddMethod(CodeTypeDeclaration classDeclaration, MethodBase mb) {
+            CodeMemberMethod cmm = new CodeMemberMethod {
+                Name = mb.Method,
                 Attributes = MemberAttributes.Static,
                 ReturnType = new CodeTypeReference(typeof(String))
             };
-
-            StringBuilder sb = new StringBuilder();
-            switch (method.Name) {
-                case "MC":
-                    sb.Append("Debug.Assert(MethodCustom(");
-                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
-                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
-                    foreach (XmlNode parameter in method.ChildNodes) {
-                        if (parameter == method.FirstChild & parameter == method.LastChild) sb.Append($"Parameters: \"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}\"));");
-                        if (parameter == method.FirstChild & parameter != method.LastChild) sb.Append($"Parameters: \"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}|");
-                        if (parameter != method.FirstChild & parameter == method.LastChild) sb.Append($"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}\"));");
-                        if (parameter != method.FirstChild & parameter != method.LastChild) sb.Append($"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}|");
-                    }
-                    break;
-                case "MI":
-                    sb.Append("Debug.Assert(MethodInterval(");
-                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
-                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
-                    sb.Append($"LowComparator: \"{E(method.Attributes["LowComparator"].Value)}\", " );
-                    sb.Append($"Low: \"{E(method.Attributes["Low"].Value)}\", ");
-                    sb.Append($"High: \"{E(method.Attributes["High"].Value)}\", ");
-                    sb.Append($"HighComparator: \"{E(method.Attributes["HighComparator"].Value)}\", ");
-                    sb.Append($"FractionalDigits: \"{E(method.Attributes["FractionalDigits"].Value)}\", ");
-                    sb.Append($"UnitPrefix: \"{E(method.Attributes["UnitPrefix"].Value)}\", ");
-                    sb.Append($"Units: \"{E(method.Attributes["Units"].Value)}\", ");
-                    sb.Append($"UnitSuffix: \"{E(method.Attributes["UnitSuffix"].Value)}\"));");
-                    break;
-                case "MP":
-                    sb.Append("Debug.Assert(MethodProcess(");
-                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
-                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
-                    sb.Append($"Path: \"{E(method.Attributes["Path"].Value)}\", ");
-                    sb.Append($"Executable: \"{E(method.Attributes["Executable"].Value)}\", ");
-                    sb.Append($"Parameters: \"{E(method.Attributes["Parameters"].Value)}\", ");
-                    sb.Append($"Expected: \"{E(method.Attributes["Expected"].Value)}\"));");
-                    break;
-                case "MT":
-                    sb.Append("Debug.Assert(MethodTextual(");
-                    sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
-                    sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
-                    sb.Append($"Text: \"{E(method.Attributes["Text"].Value)}\"));");
-                    break;
-                default:
-                    throw new NotImplementedException($"Method Type {method.Name} not implemented.");
-
-            }
-            _ = memberMethod.Statements.Add(new CodeSnippetStatement("\t\t\t" + sb.ToString()));
-            _ = memberMethod.Statements.Add(new CodeSnippetStatement("\t\t\treturn String.Empty;"));
-            _ = classDeclaration.Members.Add(memberMethod);
+            _ = cmm.Statements.Add(new CodeSnippetStatement($"\t\t\t{mb.Assertion()}"));
+            _ = cmm.Statements.Add(new CodeSnippetStatement("\t\t\treturn String.Empty;"));
+            _ = classDeclaration.Members.Add(cmm);
         }
 
-        private static String E(String s) {
+        public static String E(String s) {
             return s.Replace("\\", "\\\\")
                     .Replace("\"", "\\\"")
                     .Replace("\'", "\\\'")
