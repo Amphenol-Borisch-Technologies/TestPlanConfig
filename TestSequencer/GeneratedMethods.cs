@@ -12,50 +12,51 @@ namespace T10 {
     using System;
     using System.Diagnostics;
     using static TestSequencer.MethodAssertions;
-
+    
+    
     internal class Class1 {
-
+        
         static string Method1() {
-            Debug.Assert(MethodTextual(Description: "Verify Firmware Revision Text.", CancelIfFail: "true", Text: "7.10"));
-            return String.Empty;
+			Debug.Assert(MethodTextual(Description: "Verify Firmware Revision Text.",CancelIfFail: "true",Text: "7.10"));
+			return String.Empty;
         }
-
+        
         static string Method2() {
-            Debug.Assert(MethodCustom(Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Key=Volts DC,Value=5V ± 5%|Key=Amperes DC,Value=1.5 ± 10%|Key=Watts DC,Value=7.5375 ± 15%"));
-            return String.Empty;
+			Debug.Assert(MethodCustom(Description: "Custom Power Method.",CancelIfFail: "true",Parameters: "Key=Volts DC,Value=5V ± 5%|Key=Amperes DC,Value=1.5 ± 10%|Key=Watts DC,Value=7.5375 ± 15%"));
+			return String.Empty;
         }
-
+        
         static string Method3() {
-            Debug.Assert(MethodProcess(Description: "Programming Process.", CancelIfFail: "true", Path: "C:\\Program Files\\Microchip\\MPLABX\\v6.15\\mplab_platform\\mplab_ipe", Executable: "ipecmd.exe", Parameters: "/P12LF1552 /E /M /Y /TPPK4 /F\"C:\\Firmware\\U1.hex\"", Expected: "0"));
-            return String.Empty;
+			Debug.Assert(MethodProcess(Description: "Programming Process.",CancelIfFail: "true",Path: "C:\\Program Files\\Microchip\\MPLABX\\v6.15\\mplab_platform\\mplab_ipe",Executable: "ipecmd.exe",Parameters: "/P12LF1552 /E /M /Y /TPPK4 /F\"C:\\Firmware\\U1.hex\"",Expected: "0"));
+			return String.Empty;
         }
-
+        
         static string Method4() {
-            Debug.Assert(MethodInterval(Description: "Miscellaneous Interval Measurement.", CancelIfFail: "true", LowComparator: "GT", Low: "1.5", High: "2.5", HighComparator: "LE", FractionalDigits: "2", UnitPrefix: "NONE", Units: "NONE", UnitSuffix: "NONE"));
-            return String.Empty;
+			Debug.Assert(MethodInterval(Description: "Miscellaneous Interval Measurement.",CancelIfFail: "true",LowComparator: "GT",Low: "1.5",High: "2.5",HighComparator: "LE",FractionalDigits: "2",UnitPrefix: "NONE",Units: "NONE",UnitSuffix: "NONE"));
+			return String.Empty;
         }
     }
-
+    
     internal class Class2 {
-
+        
         static string Method5() {
-            Debug.Assert(MethodCustom(Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Key=Volts DC,Value=5 ± 5%|Key=Amperes DC,Value=1.5 ± 10%|Key=Watts DC,Value=7.5375 ± 15%"));
-            return String.Empty;
+			Debug.Assert(MethodCustom(Description: "Custom Power Method.",CancelIfFail: "true",Parameters: "Key=Volts DC,Value=5 ± 5%|Key=Amperes DC,Value=1.5 ± 10%|Key=Watts DC,Value=7.5375 ± 15%"));
+			return String.Empty;
         }
-
+        
         static string Method6() {
-            Debug.Assert(MethodInterval(Description: "+5VDC Interval Measurement.", CancelIfFail: "true", LowComparator: "GE", Low: "4.75", High: "5.25", HighComparator: "LE", FractionalDigits: "3", UnitPrefix: "kilo", Units: "Volts", UnitSuffix: "DC"));
-            return String.Empty;
+			Debug.Assert(MethodInterval(Description: "+5VDC Interval Measurement.",CancelIfFail: "true",LowComparator: "GE",Low: "4.75",High: "5.25",HighComparator: "LE",FractionalDigits: "3",UnitPrefix: "kilo",Units: "Volts",UnitSuffix: "DC"));
+			return String.Empty;
         }
-
+        
         static string Method7() {
-            Debug.Assert(MethodProcess(Description: "Programming Process.", CancelIfFail: "true", Path: "C:\\Program Files\\Microchip\\MPLABX\\v6.15\\mplab_platform\\mplab_ipe", Executable: "ipecmd.exe", Parameters: "/P12LF1552 /E /M /Y /TPPK4 /F\"C:\\Firmware\\U2.hex\"", Expected: "0"));
-            return String.Empty;
+			Debug.Assert(MethodProcess(Description: "Programming Process.",CancelIfFail: "true",Path: "C:\\Program Files\\Microchip\\MPLABX\\v6.15\\mplab_platform\\mplab_ipe",Executable: "ipecmd.exe",Parameters: "/P12LF1552 /E /M /Y /TPPK4 /F\"C:\\Firmware\\U2.hex\"",Expected: "0"));
+			return String.Empty;
         }
-
+        
         static string Method8() {
-            Debug.Assert(MethodTextual(Description: "Verify Firmware Revision Text.", CancelIfFail: "false", Text: "5.29"));
-            return String.Empty;
+			Debug.Assert(MethodTextual(Description: "Verify Firmware Revision Text.",CancelIfFail: "false",Text: "5.29"));
+			return String.Empty;
         }
     }
 }

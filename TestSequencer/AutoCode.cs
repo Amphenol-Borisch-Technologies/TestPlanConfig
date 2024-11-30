@@ -1,7 +1,6 @@
 ﻿using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -10,6 +9,8 @@ using Microsoft.CSharp;
 namespace TestSequencer {
 
     public class XmlToCSharpMethods {
+        private static String INDENTATION = "    ";
+
         public static void Main() {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(Properties.Resources.XML_File);
@@ -92,8 +93,8 @@ namespace TestSequencer {
                     throw new NotImplementedException($"Method Type {method.Name} not implemented.");
 
             }
-            _ = memberMethod.Statements.Add(new CodeSnippetStatement(sb.ToString()));
-            _ = memberMethod.Statements.Add(new CodeSnippetStatement("return String.Empty;"));
+            _ = memberMethod.Statements.Add(new CodeSnippetStatement("\t\t\t" + sb.ToString()));
+            _ = memberMethod.Statements.Add(new CodeSnippetStatement("\t\t\treturn String.Empty;"));
             _ = classDeclaration.Members.Add(memberMethod);
         }
 
@@ -101,7 +102,7 @@ namespace TestSequencer {
             return s.Replace("\\", "\\\\")
                     .Replace("\"", "\\\"")
                     .Replace("\'", "\\\'")
-                    .Replace("\t", "\\t");
+                    .Replace("\t", INDENTATION);
         }
 
         private static void GenerateCSharpCode(CodeCompileUnit compileUnit, String outputFileName) {
@@ -109,7 +110,7 @@ namespace TestSequencer {
             CodeGeneratorOptions options = new CodeGeneratorOptions {
                 BlankLinesBetweenMembers = true,
                 BracingStyle = "Block",
-                IndentString = "    "
+                IndentString = INDENTATION
             };
 
             using (StreamWriter sourceWriter = new StreamWriter(outputFileName)) { provider.GenerateCodeFromCompileUnit(compileUnit, sourceWriter, options); }
