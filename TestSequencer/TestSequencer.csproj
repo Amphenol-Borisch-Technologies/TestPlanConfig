@@ -66,7 +66,6 @@
     <Compile Include="VEE_Invocation.cs" />
     <Compile Include="Generated.cs" />
     <Compile Include="Generator.cs" />
-    <Compile Include="GeneratorXML.cs" />
     <Compile Include="MethodAssertions.cs" />
     <Compile Include="Sequencer.cs" />
     <Compile Include="Deserializer.cs" />

@@ -20,7 +20,7 @@ namespace TestSequencer {
                 using (reader = XmlReader.Create(Properties.Resources.XML_File, settings)) {
                     Double low, high;
                     while (reader.Read()) {
-                        if (reader.NodeType == XmlNodeType.Element && String.Equals(reader.Name, "MI")) {
+                        if (reader.NodeType == XmlNodeType.Element && String.Equals(reader.Name, nameof(MI))) {
                             // NOTE: This if block required because Microsoft's Visual Studio only supports XML Schema 1.0.
                             // - If Visual Studio supported XSD 1.1, then <xs:assert test="@Low le @High"/> would obviate this block.
                             #region TLDR below compares just some of the many mainstream XML editing options.

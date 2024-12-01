@@ -17,12 +17,14 @@ namespace T10 {
     internal class Class1 {
         
         static string Method1() {
+			Debug.Assert(TO(Namespace: "T10", Description: "Example Test Operation.", TestGroups: "Class1|Class2"));
+			Debug.Assert(TG(Class: "Class1", Description: "Example Test Group.", CancelIfFail: "true", Independent: "true", Methods: "Method1|Method2|Method3|Method4"));
 			Debug.Assert(MT(Method: "Method1", Description: "Verify Firmware Revision Text.", CancelIfFail: "true", Text: "7.10"));
 			return String.Empty;
         }
         
         static string Method2() {
-			Debug.Assert(MC(Method: "Method2", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Key=Volts DC/Value=5V ± 5%|Key=Amperes DC/Value=1.5 ± 10%|Key=Watts DC/Value=7.5375 ± 15%"));
+			Debug.Assert(MC(Method: "Method2", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Volts DC=5V ± 5%|Amperes DC=1.5 ± 10%|Watts DC=7.5375 ± 15%"));
 			return String.Empty;
         }
         
@@ -40,7 +42,8 @@ namespace T10 {
     internal class Class2 {
         
         static string Method5() {
-			Debug.Assert(MC(Method: "Method5", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Key=Volts DC/Value=5 ± 5%|Key=Amperes DC/Value=1.5 ± 10%|Key=Watts DC/Value=7.5375 ± 15%"));
+			Debug.Assert(TG(Class: "Class2", Description: "Rinse and Repeat.", CancelIfFail: "true", Independent: "true", Methods: "Method5|Method6|Method7|Method8"));
+			Debug.Assert(MC(Method: "Method5", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Volts DC=5 ± 5%|Amperes DC=1.5 ± 10%|Watts DC=7.5375 ± 15%"));
 			return String.Empty;
         }
         
