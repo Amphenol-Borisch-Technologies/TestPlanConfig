@@ -26,7 +26,7 @@ namespace TestSequencer {
 
             foreach (TG tg in to.TestGroups) {
                 CodeTypeDeclaration classDeclaration = AddClass(nameSpace, tg);
-                foreach (MethodBase mb in tg.Methods) AddMethod(classDeclaration, mb);
+                foreach(MethodShared ms in tg.Methods) AddMethod(classDeclaration, ms);
             }
             GenerateCSharpCode(compileUnit, @"C:\Users\phill\Source\Repos\TestPlanConfig\TestSequencer\GeneratedMethods.cs");
         }
@@ -40,13 +40,19 @@ namespace TestSequencer {
             return ctd;
         }
 
-        private static void AddMethod(CodeTypeDeclaration classDeclaration, MethodBase mb) {
+        private static void AddMethod(CodeTypeDeclaration classDeclaration, MethodShared ms) {
             CodeMemberMethod cmm = new CodeMemberMethod {
-                Name = mb.Method,
+                Name = ms.Method,
                 Attributes = MemberAttributes.Static,
                 ReturnType = new CodeTypeReference(typeof(String))
             };
-            _ = cmm.Statements.Add(new CodeSnippetStatement($"\t\t\t{mb.Assertion()}"));
+            String s=String.Empty;
+            if (ms is MC mc) s = mc.Assertion();
+            if (ms is MI mi) s = mi.Assertion();
+            if (ms is MP mp) s = mp.Assertion();
+            if (ms is MT mt) s = mt.Assertion();
+            if (String.IsNullOrEmpty(s)) throw new NotImplementedException($"Method '{ms.Method}', Description '{ms.Description}' not implemented.");
+            _ = cmm.Statements.Add(new CodeSnippetStatement($"\t\t\t{s}"));
             _ = cmm.Statements.Add(new CodeSnippetStatement("\t\t\treturn String.Empty;"));
             _ = classDeclaration.Members.Add(cmm);
         }

@@ -21,11 +21,11 @@ namespace TestSequencer {
                 Console.WriteLine($"Description: {tg.Description}");
                 Console.WriteLine($"CancelIfFail: {tg.CancelIfFail}");
                 Console.WriteLine($"Independent: {tg.Independent}");
-                foreach (var method in tg.Methods) {
-                    Console.WriteLine($"  Method: {((MethodBase)method).Method}, Description: {((MethodBase)method).Description}, CancelIfFail: {((MethodBase)method).CancelIfFail}");
+                foreach (MethodShared method in tg.Methods) {
+                    Console.WriteLine($"  Method: {method.Method}, Description: {method.Description}, CancelIfFail: {method.CancelIfFail}");
                     if (method is MC mc) {
-                        foreach (var parameter in mc.Parameters) {
-                            Console.WriteLine($"    Parameter Key: {parameter.Key}, Value: {parameter.Value}");
+                        foreach (Parameter p in mc.Parameters) {
+                            Console.WriteLine($"    Parameter Key: {p.Key}, Value: {p.Value}");
                         }
                     } else if (method is MI mi) {
                         Console.WriteLine($"    LowComparator: {mi.LowComparator}, Low: {mi.Low}, High: {mi.High}, HighComparator: {mi.HighComparator}, FractionalDigits: {mi.FractionalDigits}, UnitPrefix: {mi.UnitPrefix}, Units: {mi.Units}, UnitSuffix: {mi.UnitSuffix}");

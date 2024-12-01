@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
 using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
-using static TestSequencer.GeneratorXML;
 
 namespace TestSequencer {
 
-    [XmlRoot("TO")] public class TO {
+    public interface IAssertion { String Assertion(); }
+
+    [XmlRoot("TO")]
+    public class TO {
         [XmlAttribute("Namespace")] public String Namespace { get; set; }
         [XmlAttribute("Description")] public String Description { get; set; }
         [XmlElement("TG")] public List<TG> TestGroups { get; set; }
@@ -23,29 +24,44 @@ namespace TestSequencer {
         [XmlElement("MI", typeof(MI))]
         [XmlElement("MP", typeof(MP))]
         [XmlElement("MT", typeof(MT))]
-        public List<MethodBase> Methods { get; set; }
+        public List<MethodShared> Methods { get; set; }
     }
 
-    public class MethodBase {
+    public abstract class MethodShared {
         [XmlAttribute("Method")] public String Method { get; set; }
         [XmlAttribute("Description")] public String Description { get; set; }
         [XmlAttribute("CancelIfFail")] public Boolean CancelIfFail { get; set; }
-        public String Assertion() {
-            StringBuilder sb = new StringBuilder($"Debug.Assert({GetType().Name}");
-            PropertyInfo[] properties = GetType().GetProperties(BindingFlags.Public);
-            Int32 i = 0;
-            foreach (PropertyInfo pi in properties) {
-                sb.Append($"{pi.Name}: \"{E((String)pi.GetValue(this))}\"");
-                String s = properties.Length < i ? ", " : "));";
-                sb.Append(s);
-                i++;
-            }
+
+        public String AssertionShared() {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"Method: {EF(GetType().GetProperty("Method").GetValue(this))}, ");
+            sb.Append($"Description: {EF(GetType().GetProperty("Description").GetValue(this))}, ");
+            sb.Append($"CancelIfFail: {EF(GetType().GetProperty("CancelIfFail").GetValue(this))}, ");
             return sb.ToString();
+        }
+        internal String EF(Object o) {
+            String s = (o.ToString()).Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\'", "\\\'");
+            return "\"" + s + "\"";
         }
     }
 
-    public class MC : MethodBase {
+    public class MC : MethodShared, IAssertion {
         [XmlElement("Parameter")] public List<Parameter> Parameters { get; set; }
+
+        public String Assertion() {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"Debug.Assert({GetType().Name}(");
+            sb.Append(AssertionShared());
+            if (Parameters.Count > 0) sb.Append($"Parameters: {KV()}));");
+            return sb.ToString();
+        }
+        private String KV() {
+            StringBuilder sb = new StringBuilder();
+            foreach (Parameter p in Parameters) sb.Append($"Key={p.Key},Value={p.Value}|");
+            String s = sb.ToString();
+            s = s.Remove(s.Length - 1) + "));"; // Remove trailing "|", add closing "));"
+            return EF(s);
+        }
     }
 
     public class Parameter {
@@ -53,7 +69,7 @@ namespace TestSequencer {
         [XmlAttribute("Value")] public String Value { get; set; }
     }
 
-    public class MI : MethodBase {
+    public class MI : MethodShared, IAssertion {
         [XmlAttribute("LowComparator")] public MI_LowComparator LowComparator { get; set; }
         [XmlAttribute("Low")] public Double Low { get; set; }
         [XmlAttribute("High")] public Double High { get; set; }
@@ -62,17 +78,21 @@ namespace TestSequencer {
         [XmlAttribute("UnitPrefix")] public MI_UnitPrefix UnitPrefix { get; set; }
         [XmlAttribute("Units")] public MI_Units Units { get; set; }
         [XmlAttribute("UnitSuffix")] public MI_UnitSuffix UnitSuffix { get; set; }
-    }
 
-    public class MP : MethodBase {
-        [XmlAttribute("Path")] public String Path { get; set; }
-        [XmlAttribute("Executable")] public String Executable { get; set; }
-        [XmlAttribute("Parameters")] public String Parameters { get; set; }
-        [XmlAttribute("Expected")] public String Expected { get; set; }
-    }
-
-    public class MT : MethodBase {
-        [XmlAttribute("Text")] public String Text { get; set; }
+        public String Assertion() {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"Debug.Assert({GetType().Name}(");
+            sb.Append(AssertionShared());
+            sb.Append($"LowComparator: {EF(GetType().GetProperty("LowComparator").GetValue(this))}, ");
+            sb.Append($"Low: {EF(GetType().GetProperty("Low").GetValue(this))}, ");
+            sb.Append($"High: {EF(GetType().GetProperty("High").GetValue(this))}, ");
+            sb.Append($"HighComparator: {EF(GetType().GetProperty("HighComparator").GetValue(this))}, ");
+            sb.Append($"FractionalDigits: {EF(GetType().GetProperty("FractionalDigits").GetValue(this))}, ");
+            sb.Append($"UnitPrefix: {EF(GetType().GetProperty("UnitPrefix").GetValue(this))}, ");
+            sb.Append($"Units: {EF(GetType().GetProperty("Units").GetValue(this))}, ");
+            sb.Append($"UnitSuffix: {EF(GetType().GetProperty("UnitSuffix").GetValue(this))}));");
+            return sb.ToString();
+        }
     }
 
     public enum MI_LowComparator { GE, GT }
@@ -80,4 +100,34 @@ namespace TestSequencer {
     public enum MI_UnitPrefix { NONE, peta, tera, giga, mega, kilo, hecto, deca, deci, centi, milli, micro, nano, pico, femto }
     public enum MI_Units { NONE, Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
     public enum MI_UnitSuffix { NONE, AC, DC, Peak, PP, RMS }
+
+    public class MP : MethodShared, IAssertion {
+        [XmlAttribute("Path")] public String Path { get; set; }
+        [XmlAttribute("Executable")] public String Executable { get; set; }
+        [XmlAttribute("Parameters")] public String Parameters { get; set; }
+        [XmlAttribute("Expected")] public String Expected { get; set; }
+
+        public String Assertion() {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"Debug.Assert({GetType().Name}(");
+            sb.Append(AssertionShared());
+            sb.Append($"Path: {EF(GetType().GetProperty("Path").GetValue(this))}, ");
+            sb.Append($"Executable: {EF(GetType().GetProperty("Executable").GetValue(this))}, ");
+            sb.Append($"Parameters: {EF(GetType().GetProperty("Parameters").GetValue(this))}, ");
+            sb.Append($"Expected: {EF(GetType().GetProperty("Expected").GetValue(this))}));");
+            return sb.ToString();
+        }
+    }
+
+    public class MT : MethodShared, IAssertion {
+        [XmlAttribute("Text")] public String Text { get; set; }
+
+        public String Assertion() {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"Debug.Assert({GetType().Name}(");
+            sb.Append(AssertionShared());
+            sb.Append($"Text: {EF(GetType().GetProperty("Text").GetValue(this))}));");
+            return sb.ToString();
+        }
+    }
 }
