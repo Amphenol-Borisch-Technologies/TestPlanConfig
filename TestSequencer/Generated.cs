@@ -24,7 +24,7 @@ namespace T10 {
         }
         
         static string Method2() {
-			Debug.Assert(MC(Method: "Method2", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Volts DC=5V ± 5%|Amperes DC=1.5 ± 10%|Watts DC=7.5375 ± 15%"));
+			Debug.Assert(MC(Method: "Method2", Description: "Custom Power Method.", CancelIfFail: "true"));
 			return String.Empty;
         }
         
@@ -43,7 +43,7 @@ namespace T10 {
         
         static string Method5() {
 			Debug.Assert(TG(Class: "Class2", Description: "Rinse and Repeat.", CancelIfFail: "true", Independent: "true", Methods: "Method5|Method6|Method7|Method8"));
-			Debug.Assert(MC(Method: "Method5", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Volts DC=5 ± 5%|Amperes DC=1.5 ± 10%|Watts DC=7.5375 ± 15%"));
+			Debug.Assert(MC(Method: "Method5", Description: "Custom Power Method.", CancelIfFail: "true"));
 			return String.Empty;
         }
         

@@ -23,7 +23,7 @@ namespace TestSequencer {
             sb.Append($"{DEBUG_ASSERT}{GetType().Name}{BEGIN}");
             sb.Append($"{nameof(Namespace)}{CS}{EF(GetType().GetProperty(nameof(Namespace)).GetValue(this))}{CONTINUE}");
             sb.Append($"{nameof(Description)}{CS}{EF(GetType().GetProperty(nameof(Description)).GetValue(this))}");
-            if (TestGroups.Count > 0) sb.Append($"{CONTINUE}{nameof(TestGroups)}{CS}{TGs()}");
+            sb.Append($"{CONTINUE}{nameof(TestGroups)}{CS}{TGs()}");
             sb.Append($"{END}");
             return sb.ToString();
         }
@@ -56,7 +56,7 @@ namespace TestSequencer {
             sb.Append($"{nameof(Description)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Description)).GetValue(this))}{TO.CONTINUE}");
             sb.Append($"{nameof(CancelIfFail)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(CancelIfFail)).GetValue(this).ToString().ToLower())}{TO.CONTINUE}");
             sb.Append($"{nameof(Independent)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Independent)).GetValue(this).ToString().ToLower())}");
-            if (Methods.Count > 0) sb.Append($"{TO.CONTINUE}{nameof(Methods)}{TO.CS}{Ms()}");
+            sb.Append($"{TO.CONTINUE}{nameof(Methods)}{TO.CS}{Ms()}");
             sb.Append($"{TO.END}");
             return sb.ToString();
         }
@@ -77,7 +77,7 @@ namespace TestSequencer {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{nameof(Method)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Method)).GetValue(this))}{TO.CONTINUE}");
             sb.Append($"{nameof(Description)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Description)).GetValue(this))}{TO.CONTINUE}");
-            sb.Append($"{nameof(CancelIfFail)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(CancelIfFail)).GetValue(this).ToString().ToLower())}{TO.CONTINUE}");
+            sb.Append($"{nameof(CancelIfFail)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(CancelIfFail)).GetValue(this).ToString().ToLower())}");
             return sb.ToString();
         }
     }
@@ -88,8 +88,9 @@ namespace TestSequencer {
         public String Assertion() {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{TO.DEBUG_ASSERT}{GetType().Name}{TO.BEGIN}");
-            sb.Append(AssertionShared());
-            if (Parameters.Count > 0) sb.Append($"{nameof(Parameters)}{TO.CS}{Ps()}{TO.END}");
+            sb.Append($"{AssertionShared()}");
+            if (Parameters.Count > 0) sb.Append($"{TO.CONTINUE}{nameof(Parameters)}{TO.CS}{Ps()}");
+            sb.Append($"{TO.END}");
             return sb.ToString();
         }
         private String Ps() {
@@ -117,7 +118,7 @@ namespace TestSequencer {
         public String Assertion() {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{TO.DEBUG_ASSERT}{GetType().Name}{TO.BEGIN}");
-            sb.Append(AssertionShared());
+            sb.Append($"{AssertionShared()}{TO.CONTINUE}");
             sb.Append($"{nameof(LowComparator)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(LowComparator)).GetValue(this))}{TO.CONTINUE}");
             sb.Append($"{nameof(Low)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Low)).GetValue(this))}{TO.CONTINUE}");
             sb.Append($"{nameof(High)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(High)).GetValue(this))}{TO.CONTINUE}");
@@ -145,7 +146,7 @@ namespace TestSequencer {
         public String Assertion() {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{TO.DEBUG_ASSERT}{GetType().Name}{TO.BEGIN}");
-            sb.Append(AssertionShared());
+            sb.Append($"{AssertionShared()}{TO.CONTINUE}");
             sb.Append($"{nameof(Path)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Path)).GetValue(this))}{TO.CONTINUE}");
             sb.Append($"{nameof(Executable)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Executable)).GetValue(this))}{TO.CONTINUE}");
             sb.Append($"{nameof(Parameters)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Parameters)).GetValue(this))}{TO.CONTINUE}");
@@ -160,7 +161,7 @@ namespace TestSequencer {
         public String Assertion() {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{TO.DEBUG_ASSERT}{GetType().Name}{TO.BEGIN}");
-            sb.Append(AssertionShared());
+            sb.Append($"{AssertionShared()}{TO.CONTINUE}");
             sb.Append($"{nameof(Text)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Text)).GetValue(this))}{TO.END}");
             return sb.ToString();
         }

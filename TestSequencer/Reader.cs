@@ -17,79 +17,80 @@ namespace TestSequencer {
         [STAThread]
         public static void Main() {
             XDocument tocf = XDocument.Load(Properties.Resources.XML_File);
-            XElement toElement = tocf.Element("TO");
-            String nameSpace = (toElement.Attribute("Namespace")?.Value);
-            String description = (toElement.Attribute("Description")?.Value);
-            Console.WriteLine($"Namespace         : {nameSpace}");
-            Console.WriteLine($"Description       : {description}");
+            XElement toElement = tocf.Element(nameof(TO));
+            String nameSpace = (toElement.Attribute(nameof(TO.Namespace))?.Value);
+            String description = (toElement.Attribute(nameof(TO.Description))?.Value);
+            Console.WriteLine($"{nameof(TO.Namespace)}         : {nameSpace}");
+            Console.WriteLine($"{nameof(TO.Description)}       : {description}");
 
-            IEnumerable<XElement> tgElements = toElement.Elements("TG");
+            IEnumerable<XElement> tgElements = toElement.Elements(nameof(TG));
             foreach (XElement tg in tgElements) {
-                String tgClass = tg.Attribute("Class")?.Value;
-                String tgDescription = tg.Attribute("Description")?.Value;
+                String tgClass = tg.Attribute(nameof(TG.Class))?.Value;
+                String tgDescription = tg.Attribute(nameof(TG.Description))?.Value;
 
-                Boolean tgCancelIfFail = Boolean.Parse(tg.Attribute("CancelIfFail")?.Value);
-                Boolean i = Boolean.Parse(tg.Attribute("Independent")?.Value);
-                Console.WriteLine($"\nTG Class          : {tgClass}");
-                Console.WriteLine($"TG Description    : {tgDescription}");
-                Console.WriteLine($"Cancel If Fail    : {tgCancelIfFail}");
-                Console.WriteLine($"Independent       : {i}");
+                Boolean tgCancelIfFail = Boolean.Parse(tg.Attribute(nameof(TG.CancelIfFail))?.Value);
+                Boolean i = Boolean.Parse(tg.Attribute(nameof(TG.Independent))?.Value);
+                Console.WriteLine();
+                Console.WriteLine($"{nameof(TG.Class)}             : {tgClass}");
+                Console.WriteLine($"{nameof(TG.Description)}       : {tgDescription}");
+                Console.WriteLine($"{nameof(TG.CancelIfFail)}      : {tgCancelIfFail}");
+                Console.WriteLine($"{nameof(TG.Independent)}       : {i}");
 
                 IEnumerable<XElement> methods = tg.Elements();
                 foreach (XElement method in methods) {
-                    String methodName = method.Attribute("Method")?.Value;
-                    String methodDescription = method.Attribute("Description")?.Value;
-                    Boolean methodCancelIfFail = Boolean.Parse(method.Attribute("CancelIfFail")?.Value);
-
-                    Console.WriteLine($"\nMethod Type       : {method.Name.LocalName}");
-                    Console.WriteLine($"  Method          : {methodName}");
-                    Console.WriteLine($"  Description     : {methodDescription}");
-                    Console.WriteLine($"  Cancel If Fail  : {methodCancelIfFail}");
+                    String methodName = method.Attribute(nameof(MethodShared.Method))?.Value;
+                    String methodDescription = method.Attribute(nameof(MethodShared.Description))?.Value;
+                    Boolean methodCancelIfFail = Boolean.Parse(method.Attribute(nameof(MethodShared.CancelIfFail))?.Value);
+                    Console.WriteLine();
+                    Console.WriteLine($"Method Type       : {method.Name.LocalName}");
+                    Console.WriteLine($"  {nameof(MethodShared.Method)}          : {methodName}");
+                    Console.WriteLine($"  {nameof(MethodShared.Description)}     : {methodDescription}");
+                    Console.WriteLine($"  {nameof(MethodShared.CancelIfFail)}    : {methodCancelIfFail}");
 
                     // TODO: Use Activator.CreateInstance to auto-create appropriate TestMeasurement objects, eliminating below switch.
                     // TODO: Rename TestMeasurement objects to TestMethod objects?
                     switch (method.Name.LocalName) {
                         case nameof(MC):
-                            IEnumerable<XElement> parameters = method.Elements("Parameter");
+                            IEnumerable<XElement> parameters = method.Elements(nameof(Parameter));
                             foreach (XElement parameter in parameters) {
-                                String key = parameter.Attribute("Key")?.Value;
-                                String value = parameter.Attribute("Value")?.Value;
-                                Console.WriteLine($"    Parameter Key : {key}, Value: {value}");
+                                String key = parameter.Attribute(nameof(Parameter.Key))?.Value;
+                                String value = parameter.Attribute(nameof(Parameter.Value))?.Value;
+                                Console.WriteLine($"    {nameof(Parameter)} {nameof(Parameter.Key)} : {key}, {nameof(Parameter.Value)}: {value}");
                             }
                             break;
                         case nameof(MI):
-                            Double low = Double.Parse(method.Attribute("Low")?.Value);
-                            Double high = Double.Parse(method.Attribute("High")?.Value);
+                            Double low = Double.Parse(method.Attribute(nameof(MI.Low))?.Value);
+                            Double high = Double.Parse(method.Attribute(nameof(MI.High))?.Value);
                             if (low > high) {
                                 throw new ArgumentException($"Invalid Method element {method.Name.LocalName}:{Environment.NewLine}" +
-                                    $"Method      :{methodName}{Environment.NewLine}" +
-                                    $"Description :{methodDescription}{Environment.NewLine}" +
-                                    $"Invalidity  : Low '{low}' is > High '{high}'.{Environment.NewLine}");
+                                    $"{nameof(MI.Method)}      :{methodName}{Environment.NewLine}" +
+                                    $"{nameof(MI.Description)} :{methodDescription}{Environment.NewLine}" +
+                                    $"Invalidity  : {nameof(MI.Low)} '{low}' is > {nameof(MI.High)} '{high}'.{Environment.NewLine}");
                             }
-                            UInt32 fractionalDigits = UInt32.Parse(method.Attribute("FractionalDigits")?.Value);
-                            String unitPrefix = method.Attribute("UnitPrefix")?.Value;
-                            String units = method.Attribute("Units")?.Value;
-                            String unitSuffix = method.Attribute("UnitSuffix")?.Value;
-                            Console.WriteLine($"    Low           : {low}");
-                            Console.WriteLine($"    High          : {high}");
-                            Console.WriteLine($"    FracDigits    : {fractionalDigits}");
-                            Console.WriteLine($"    UnitPrefix    : {unitPrefix}");
-                            Console.WriteLine($"    Units         : {units}");
-                            Console.WriteLine($"    UnitSuffix    : {unitSuffix}");
+                            UInt32 fractionalDigits = UInt32.Parse(method.Attribute(nameof(MI.FractionalDigits))?.Value);
+                            String unitPrefix = method.Attribute(nameof(MI.UnitPrefix))?.Value;
+                            String units = method.Attribute(nameof(MI.Units))?.Value;
+                            String unitSuffix = method.Attribute(nameof(MI.UnitSuffix))?.Value;
+                            Console.WriteLine($"    {nameof(MI.Low)}           : {low}");
+                            Console.WriteLine($"    {nameof(MI.High)}          : {high}");
+                            Console.WriteLine($"    {nameof(MI.FractionalDigits)}    : {fractionalDigits}");
+                            Console.WriteLine($"    {nameof(MI.UnitPrefix)}    : {unitPrefix}");
+                            Console.WriteLine($"    {nameof(MI.Units)}         : {units}");
+                            Console.WriteLine($"    {nameof(MI.UnitSuffix)}    : {unitSuffix}");
                             break;
                         case nameof(MP):
-                            String path = method.Attribute("Path")?.Value;
-                            String executable = method.Attribute("Executable")?.Value;
-                            String parms = method.Attribute("Parameters")?.Value;
-                            String expected = method.Attribute("Expected")?.Value;
-                            Console.WriteLine($"    Path          : {path}");
-                            Console.WriteLine($"    Executable    : {executable}");
-                            Console.WriteLine($"    Parameters    : {parms}");
-                            Console.WriteLine($"    Expected      : {expected}");
+                            String path = method.Attribute(nameof(MP.Path))?.Value;
+                            String executable = method.Attribute(nameof(MP.Executable))?.Value;
+                            String parms = method.Attribute(nameof(MP.Parameters))?.Value;
+                            String expected = method.Attribute(nameof(MP.Expected))?.Value;
+                            Console.WriteLine($"    {nameof(MP.Path)}          : {path}");
+                            Console.WriteLine($"    {nameof(MP.Executable)}    : {executable}");
+                            Console.WriteLine($"    {nameof(MP.Parameters)}    : {parms}");
+                            Console.WriteLine($"    {nameof(MP.Expected)}      : {expected}");
                             break;
                         case nameof(MT):
-                            String text = method.Attribute("Text")?.Value;
-                            Console.WriteLine($"    Text          : {text}");
+                            String text = method.Attribute(nameof(MT.Text))?.Value;
+                            Console.WriteLine($"    {nameof(MT.Text)}          : {text}");
                             break;
                         default:
                             throw new InvalidOperationException($"METHODS '{method.Name.LocalName}' not handled.");

@@ -49,18 +49,18 @@ namespace TestSequencer {
                             //   - XML editing integrated with Visual Studio is incredibly convenient.
                             //   - As a multi-purpose editor, can develop C# .Net applications.  Plus many other languages.
                             #endregion
-                            low = Double.Parse(reader.GetAttribute("Low"));
-                            high = Double.Parse(reader.GetAttribute("High"));
+                            low = Double.Parse(reader.GetAttribute(nameof(MI.Low)));
+                            high = Double.Parse(reader.GetAttribute(nameof(MI.High)));
                             if (low > high) {
                                 xmlValid = false;
-                                messages.AppendLine($"MethodInterval's Low > High:");
+                                messages.AppendLine($"MethodInterval's {nameof(MI.Low)} > {nameof(MI.High)}:");
                                 messages.AppendLine($"  Line Number   : {(reader as IXmlLineInfo).LineNumber}");
                                 messages.AppendLine($"  Line Position : {(reader as IXmlLineInfo).LinePosition}");
                                 messages.AppendLine($"  Node Type     : {reader.NodeType}");
-                                messages.AppendLine($"  Description   : {reader.GetAttribute("Description")}");
-                                messages.AppendLine($"  Method        : {reader.GetAttribute("Method")}");
-                                messages.AppendLine($"  Low           : {reader.GetAttribute("Low")}");
-                                messages.AppendLine($"  High          : {reader.GetAttribute("High")}{Environment.NewLine}{Environment.NewLine}");
+                                messages.AppendLine($"  {nameof(MI.Description)}   : {reader.GetAttribute(nameof(MI.Description))}");
+                                messages.AppendLine($"  {nameof(MI.Method)}        : {reader.GetAttribute(nameof(MI.Method))}");
+                                messages.AppendLine($"  {nameof(MI.Low)}           : {reader.GetAttribute(nameof(MI.Low))}");
+                                messages.AppendLine($"  {nameof(MI.High)}          : {reader.GetAttribute(nameof(MI.High))}{Environment.NewLine}{Environment.NewLine}");
                             }
                         }
                     }
