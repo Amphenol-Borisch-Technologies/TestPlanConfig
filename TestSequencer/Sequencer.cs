@@ -83,7 +83,7 @@ namespace TestSequencer {
     }
 
     public class MC : MethodShared, IAssertion {
-        [XmlElement(nameof(Parameters))] public List<Parameter> Parameters { get; set; }
+        [XmlElement(nameof(Parameter))] public List<Parameter> Parameters { get; set; }
 
         public String Assertion() {
             StringBuilder sb = new StringBuilder();

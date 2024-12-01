@@ -13,11 +13,7 @@
     <!-- M4's interval corresponds to 1.5 < M2 ≤ 2.5, notated as (1.5, 2.5]. -->
   </TG>
   <TG Class="Class2" Description="Rinse and Repeat." CancelIfFail="true" Independent="true">
-    <MC Method="Method5" Description="Custom Power Method." CancelIfFail="true">
-      <Parameter Key="Volts DC" Value="5 ± 5%" />
-      <Parameter Key="Amperes DC" Value="1.5 ± 10%" />
-      <Parameter Key="Watts DC" Value="7.5375 ± 15%" />
-    </MC>
+    <MC Method="Method5" Description="Custom Power Method." CancelIfFail="true" />
     <MI Method="Method6" Description="+5VDC Interval Measurement." CancelIfFail="true" LowComparator="GE" Low="4.75" High="5.25" HighComparator="LE" FractionalDigits="3" UnitPrefix="kilo" Units="Volts" UnitSuffix="DC" />
     <!-- M6's interval corresponds to 4.75 ≤ M6 ≤ 5.25, notated as [4.75, 5.25]. -->
     <MP Method="Method7" Description="Programming Process." CancelIfFail="true" Path="C:\Program Files\Microchip\MPLABX\v6.15\mplab_platform\mplab_ipe" Executable="ipecmd.exe" Parameters="/P12LF1552 /E /M /Y /TPPK4 /F&quot;C:\Firmware\U2.hex&quot;" Expected="0" />

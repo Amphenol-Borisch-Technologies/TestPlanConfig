@@ -24,7 +24,7 @@ namespace T10 {
         }
         
         static string Method2() {
-			Debug.Assert(MC(Method: "Method2", Description: "Custom Power Method.", CancelIfFail: "true"));
+			Debug.Assert(MC(Method: "Method2", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Volts DC=5V ± 5%|Amperes DC=1.5 ± 10%|Watts DC=7.5375 ± 15%"));
 			return String.Empty;
         }
         
