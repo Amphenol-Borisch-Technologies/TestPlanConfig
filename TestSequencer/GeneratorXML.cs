@@ -52,18 +52,20 @@ namespace TestSequencer {
             StringBuilder sb = new StringBuilder();
             switch (method.Name) {
                 case nameof(MC):
-                    sb.Append("Debug.Assert(MethodCustom(");
+                    sb.Append("Debug.Assert(MC(");
+                    sb.Append($"Method: \"{E(method.Attributes["Method"].Value)}\", ");
                     sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
                     sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
                     foreach (XmlNode parameter in method.ChildNodes) {
-                        if (parameter == method.FirstChild & parameter == method.LastChild) sb.Append($"Parameters: \"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}\"));");
-                        if (parameter == method.FirstChild & parameter != method.LastChild) sb.Append($"Parameters: \"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}|");
-                        if (parameter != method.FirstChild & parameter == method.LastChild) sb.Append($"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}\"));");
-                        if (parameter != method.FirstChild & parameter != method.LastChild) sb.Append($"Key={E(parameter.Attributes["Key"].Value)},Value={E(parameter.Attributes["Value"].Value)}|");
+                        if (parameter == method.FirstChild & parameter == method.LastChild) sb.Append($"Parameters: \"Key={E(parameter.Attributes["Key"].Value)}/Value={E(parameter.Attributes["Value"].Value)}\"));");
+                        if (parameter == method.FirstChild & parameter != method.LastChild) sb.Append($"Parameters: \"Key={E(parameter.Attributes["Key"].Value)}/Value={E(parameter.Attributes["Value"].Value)}|");
+                        if (parameter != method.FirstChild & parameter == method.LastChild) sb.Append($"Key={E(parameter.Attributes["Key"].Value)}/Value={E(parameter.Attributes["Value"].Value)}\"));");
+                        if (parameter != method.FirstChild & parameter != method.LastChild) sb.Append($"Key={E(parameter.Attributes["Key"].Value)}/Value={E(parameter.Attributes["Value"].Value)}|");
                     }
                     break;
                 case nameof(MI):
-                    sb.Append("Debug.Assert(MethodInterval(");
+                    sb.Append("Debug.Assert(MI(");
+                    sb.Append($"Method: \"{E(method.Attributes["Method"].Value)}\", ");
                     sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
                     sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
                     sb.Append($"LowComparator: \"{E(method.Attributes["LowComparator"].Value)}\", " );
@@ -76,7 +78,8 @@ namespace TestSequencer {
                     sb.Append($"UnitSuffix: \"{E(method.Attributes["UnitSuffix"].Value)}\"));");
                     break;
                 case nameof(MP):
-                    sb.Append("Debug.Assert(MethodProcess(");
+                    sb.Append("Debug.Assert(MP(");
+                    sb.Append($"Method: \"{E(method.Attributes["Method"].Value)}\", ");
                     sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
                     sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
                     sb.Append($"Path: \"{E(method.Attributes["Path"].Value)}\", ");
@@ -85,7 +88,8 @@ namespace TestSequencer {
                     sb.Append($"Expected: \"{E(method.Attributes["Expected"].Value)}\"));");
                     break;
                 case nameof(MT):
-                    sb.Append("Debug.Assert(MethodTextual(");
+                    sb.Append("Debug.Assert(MT(");
+                    sb.Append($"Method: \"{E(method.Attributes["Method"].Value)}\", ");
                     sb.Append($"Description: \"{E(method.Attributes["Description"].Value)}\", ");
                     sb.Append($"CancelIfFail: \"{E(method.Attributes["CancelIfFail"].Value)}\", ");
                     sb.Append($"Text: \"{E(method.Attributes["Text"].Value)}\"));");

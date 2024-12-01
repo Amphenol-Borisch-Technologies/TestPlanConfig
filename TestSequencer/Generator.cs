@@ -46,7 +46,7 @@ namespace TestSequencer {
                 Attributes = MemberAttributes.Static,
                 ReturnType = new CodeTypeReference(typeof(String))
             };
-            String s=String.Empty;
+            String s = null;
             if (ms is MC mc) s = mc.Assertion();
             if (ms is MI mi) s = mi.Assertion();
             if (ms is MP mp) s = mp.Assertion();
@@ -55,13 +55,6 @@ namespace TestSequencer {
             _ = cmm.Statements.Add(new CodeSnippetStatement($"\t\t\t{s}"));
             _ = cmm.Statements.Add(new CodeSnippetStatement("\t\t\treturn String.Empty;"));
             _ = classDeclaration.Members.Add(cmm);
-        }
-
-        public static String E(String s) {
-            return s.Replace("\\", "\\\\")
-                    .Replace("\"", "\\\"")
-                    .Replace("\'", "\\\'")
-                    .Replace("\t", INDENTATION);
         }
 
         private static void GenerateCSharpCode(CodeCompileUnit compileUnit, String outputFileName) {

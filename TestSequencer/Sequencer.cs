@@ -57,10 +57,9 @@ namespace TestSequencer {
         }
         private String KV() {
             StringBuilder sb = new StringBuilder();
-            foreach (Parameter p in Parameters) sb.Append($"Key={p.Key},Value={p.Value}|");
+            foreach (Parameter p in Parameters) sb.Append($"Key={p.Key}/Value={p.Value}|");
             String s = sb.ToString();
-            s = s.Remove(s.Length - 1) + "));"; // Remove trailing "|", add closing "));"
-            return EF(s);
+            return EF(s.Remove(s.Length - 1) + "));"); // Remove trailing "/", add closing "));"
         }
     }
 
