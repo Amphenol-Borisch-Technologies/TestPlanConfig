@@ -36,7 +36,7 @@ namespace TestSequencer {
             StringBuilder sb = new StringBuilder();
             sb.Append($"Method: {EF(GetType().GetProperty("Method").GetValue(this))}, ");
             sb.Append($"Description: {EF(GetType().GetProperty("Description").GetValue(this))}, ");
-            sb.Append($"CancelIfFail: {EF(GetType().GetProperty("CancelIfFail").GetValue(this))}, ");
+            sb.Append($"CancelIfFail: {EF(GetType().GetProperty("CancelIfFail").GetValue(this).ToString().ToLower())}, ");
             return sb.ToString();
         }
         internal String EF(Object o) {

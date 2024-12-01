@@ -28,7 +28,7 @@ namespace TestSequencer {
                 CodeTypeDeclaration classDeclaration = AddClass(nameSpace, tg);
                 foreach(MethodShared ms in tg.Methods) AddMethod(classDeclaration, ms);
             }
-            GenerateCSharpCode(compileUnit, @"C:\Users\phill\Source\Repos\TestPlanConfig\TestSequencer\GeneratedMethods.cs");
+            GenerateCSharpCode(compileUnit, @"C:\Users\phill\Source\Repos\TestPlanConfig\TestSequencer\Generated.cs");
         }
 
         private static CodeTypeDeclaration AddClass(CodeNamespace nameSpace, TG tg) {

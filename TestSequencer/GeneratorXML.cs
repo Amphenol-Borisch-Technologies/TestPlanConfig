@@ -29,7 +29,7 @@ namespace TestSequencer {
                 foreach (XmlNode method in group.ChildNodes) AddMethod(classDeclaration, method);
             }
 
-            GenerateCSharpCode(compileUnit, @"C:\Users\phill\Source\Repos\TestPlanConfig\TestSequencer\GeneratedMethods.cs");
+            GenerateCSharpCode(compileUnit, @"C:\Users\phill\Source\Repos\TestPlanConfig\TestSequencer\GeneratedXML.cs");
         }
 
         private static CodeTypeDeclaration AddClass(CodeNamespace nameSpace, XmlNode group) {

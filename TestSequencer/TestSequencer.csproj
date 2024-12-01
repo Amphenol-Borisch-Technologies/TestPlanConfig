@@ -63,9 +63,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generated.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="GeneratorXML.cs" />
-    <Compile Include="GeneratedMethods.cs" />
+    <Compile Include="GeneratedXML.cs" />
     <Compile Include="MethodAssertions.cs" />
     <Compile Include="Sequencer.cs" />
     <Compile Include="Deserializer.cs" />
