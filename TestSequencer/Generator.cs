@@ -8,7 +8,6 @@ using Microsoft.CSharp;
 namespace TestSequencer {
 
     public static class Generator {
-        private const String INDENTATION = "    ";
 
         public static void Main() {
             XmlSerializer serializer = new XmlSerializer(typeof(TO));
@@ -62,7 +61,7 @@ namespace TestSequencer {
             CodeGeneratorOptions options = new CodeGeneratorOptions {
                 BlankLinesBetweenMembers = true,
                 BracingStyle = "Block",
-                IndentString = INDENTATION
+                IndentString = "    "
             };
 
             using (StreamWriter sourceWriter = new StreamWriter(outputFileName)) { provider.GenerateCodeFromCompileUnit(compileUnit, sourceWriter, options); }

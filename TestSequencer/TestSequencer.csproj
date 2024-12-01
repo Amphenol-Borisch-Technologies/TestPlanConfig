@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VEE_Invocation.cs" />
     <Compile Include="Generated.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="GeneratorXML.cs" />
