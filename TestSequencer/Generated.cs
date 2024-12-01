@@ -22,7 +22,7 @@ namespace T10 {
         }
         
         static string Method2() {
-			Debug.Assert(MC(Method: "Method2", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Key=Volts DC/Value=5V ± 5%|Key=Amperes DC/Value=1.5 ± 10%|Key=Watts DC/Value=7.5375 ± 15%));"));
+			Debug.Assert(MC(Method: "Method2", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Key=Volts DC/Value=5V ± 5%|Key=Amperes DC/Value=1.5 ± 10%|Key=Watts DC/Value=7.5375 ± 15%"));
 			return String.Empty;
         }
         
@@ -40,7 +40,7 @@ namespace T10 {
     internal class Class2 {
         
         static string Method5() {
-			Debug.Assert(MC(Method: "Method5", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Key=Volts DC/Value=5 ± 5%|Key=Amperes DC/Value=1.5 ± 10%|Key=Watts DC/Value=7.5375 ± 15%));"));
+			Debug.Assert(MC(Method: "Method5", Description: "Custom Power Method.", CancelIfFail: "true", Parameters: "Key=Volts DC/Value=5 ± 5%|Key=Amperes DC/Value=1.5 ± 10%|Key=Watts DC/Value=7.5375 ± 15%"));
 			return String.Empty;
         }
         
