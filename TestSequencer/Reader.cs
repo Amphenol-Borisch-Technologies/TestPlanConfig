@@ -49,7 +49,7 @@ namespace TestSequencer {
                     // TODO: Use Activator.CreateInstance to auto-create appropriate TestMeasurement objects, eliminating below switch.
                     // TODO: Rename TestMeasurement objects to TestMethod objects?
                     switch (method.Name.LocalName) {
-                        case "MC":
+                        case nameof(MC):
                             IEnumerable<XElement> parameters = method.Elements("Parameter");
                             foreach (XElement parameter in parameters) {
                                 String key = parameter.Attribute("Key")?.Value;
@@ -57,7 +57,7 @@ namespace TestSequencer {
                                 Console.WriteLine($"    Parameter Key : {key}, Value: {value}");
                             }
                             break;
-                        case "MI":
+                        case nameof(MI):
                             Double low = Double.Parse(method.Attribute("Low")?.Value);
                             Double high = Double.Parse(method.Attribute("High")?.Value);
                             if (low > high) {
@@ -77,7 +77,7 @@ namespace TestSequencer {
                             Console.WriteLine($"    Units         : {units}");
                             Console.WriteLine($"    UnitSuffix    : {unitSuffix}");
                             break;
-                        case "MP":
+                        case nameof(MP):
                             String path = method.Attribute("Path")?.Value;
                             String executable = method.Attribute("Executable")?.Value;
                             String parms = method.Attribute("Parameters")?.Value;
@@ -87,7 +87,7 @@ namespace TestSequencer {
                             Console.WriteLine($"    Parameters    : {parms}");
                             Console.WriteLine($"    Expected      : {expected}");
                             break;
-                        case "MT":
+                        case nameof(MT):
                             String text = method.Attribute("Text")?.Value;
                             Console.WriteLine($"    Text          : {text}");
                             break;

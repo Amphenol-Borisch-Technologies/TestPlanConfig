@@ -15,13 +15,12 @@ namespace TestSequencer {
             TO to = (TO)serializer.Deserialize(fs);
             fs.Close(); fs.Dispose();
 
-            CodeCompileUnit compileUnit = new CodeCompileUnit();
             CodeNamespace nameSpace = new CodeNamespace(to.Namespace);
-            _ = compileUnit.Namespaces.Add(nameSpace);
-
             nameSpace.Imports.Add(new CodeNamespaceImport("System"));
             nameSpace.Imports.Add(new CodeNamespaceImport("System.Diagnostics"));
             nameSpace.Imports.Add(new CodeNamespaceImport("static TestSequencer.MethodAssertions"));
+            CodeCompileUnit compileUnit = new CodeCompileUnit();
+            _ = compileUnit.Namespaces.Add(nameSpace);
 
             foreach (TG tg in to.TestGroups) {
                 CodeTypeDeclaration classDeclaration = AddClass(nameSpace, tg);
@@ -45,13 +44,7 @@ namespace TestSequencer {
                 Attributes = MemberAttributes.Static,
                 ReturnType = new CodeTypeReference(typeof(String))
             };
-            String s = null;
-            if (ms is MC mc) s = mc.Assertion();
-            if (ms is MI mi) s = mi.Assertion();
-            if (ms is MP mp) s = mp.Assertion();
-            if (ms is MT mt) s = mt.Assertion();
-            if (String.IsNullOrEmpty(s)) throw new NotImplementedException($"Method '{ms.Method}', Description '{ms.Description}' not implemented.");
-            _ = cmm.Statements.Add(new CodeSnippetStatement($"\t\t\t{s}"));
+            _ = cmm.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertion)ms).Assertion()}"));
             _ = cmm.Statements.Add(new CodeSnippetStatement("\t\t\treturn String.Empty;"));
             _ = classDeclaration.Members.Add(cmm);
         }
