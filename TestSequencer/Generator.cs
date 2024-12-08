@@ -20,16 +20,13 @@ namespace TestSequencer {
             CodeCompileUnit compileUnit = new CodeCompileUnit();
             _ = compileUnit.Namespaces.Add(nameSpace);
 
-            Boolean isFirstTOMethod = true;
-            foreach (TG tg in to.TestGroups) {
-                Boolean isFirstTGMethod = true;
-                CodeTypeDeclaration classDeclaration = AddClass(nameSpace, tg);
-                foreach (MethodShared ms in tg.Methods) {
-                    AddMethod(classDeclaration, to, tg, ms, isFirstTOMethod, isFirstTGMethod);
-                    isFirstTOMethod = isFirstTGMethod = false;
+            for (Int32 testGroup = 0; testGroup < to.TestGroups.Count; testGroup++) {
+                CodeTypeDeclaration classDeclaration = AddClass(nameSpace, to.TestGroups[testGroup]);
+                for (Int32 method = 0; method < to.TestGroups[testGroup].Methods.Count; method++) {
+                    AddMethod(classDeclaration, to, testGroup, method);
                 }
             }
-            GenerateCode(compileUnit, @"C:\Users\phill\Source\Repos\TestPlanConfig\TestSequencer\Generated.cs");
+            GenerateCode(compileUnit, @"C:\Users\phils\Source\Repos\TestSequencer\TestSequencer\Generated.cs");
         }
 
         private static CodeTypeDeclaration AddClass(CodeNamespace nameSpace, TG tg) {
@@ -41,15 +38,17 @@ namespace TestSequencer {
             return codeDeclaration;
         }
 
-        private static void AddMethod(CodeTypeDeclaration classDeclaration, TO to, TG tg, MethodShared ms, Boolean isFirstTOMethod, Boolean isFirstTGMethod) {
+
+        private static void AddMethod(CodeTypeDeclaration classDeclaration, TO to, Int32 testGroup, Int32 method) {
             CodeMemberMethod memberMethod = new CodeMemberMethod {
-                Name = ms.Method,
+                Name = to.TestGroups[testGroup].Methods[method].Method,
                 Attributes = MemberAttributes.Static,
                 ReturnType = new CodeTypeReference(typeof(String))
             };
-            if (isFirstTOMethod) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertion)to).Assertion()}"));
-            if (isFirstTGMethod) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertion)tg).Assertion()}"));
-            _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertion)ms).Assertion()}"));
+            if (testGroup == 0 && method == 0) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionPresent)to).AssertionPresent()}"));
+            if (method == 0) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionPresent)to.TestGroups[testGroup]).AssertionPresent()}"));
+            else if (method < to.TestGroups[testGroup].Methods.Count) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionPresent)to.TestGroups[testGroup]).AssertionPresent()}"));
+            _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionPresent)to.TestGroups[testGroup].Methods[method]).AssertionPresent()}"));
             _ = memberMethod.Statements.Add(new CodeSnippetStatement("\t\t\treturn String.Empty;"));
             _ = classDeclaration.Members.Add(memberMethod);
         }
