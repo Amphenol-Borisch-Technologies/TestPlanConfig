@@ -38,14 +38,14 @@ namespace TestSequencer {
 
                 IEnumerable<XElement> methods = tg.Elements();
                 foreach (XElement method in methods) {
-                    String methodName = method.Attribute(nameof(MethodShared.Method))?.Value;
-                    String methodDescription = method.Attribute(nameof(MethodShared.Description))?.Value;
-                    Boolean methodCancelIfFail = Boolean.Parse(method.Attribute(nameof(MethodShared.CancelIfFail))?.Value);
+                    String methodName = method.Attribute(nameof(M.Method))?.Value;
+                    String methodDescription = method.Attribute(nameof(M.Description))?.Value;
+                    Boolean methodCancelIfFail = Boolean.Parse(method.Attribute(nameof(M.CancelIfFail))?.Value);
                     Console.WriteLine();
                     Console.WriteLine($"Method Type       : {method.Name.LocalName}");
-                    Console.WriteLine($"  {nameof(MethodShared.Method)}          : {methodName}");
-                    Console.WriteLine($"  {nameof(MethodShared.Description)}     : {methodDescription}");
-                    Console.WriteLine($"  {nameof(MethodShared.CancelIfFail)}    : {methodCancelIfFail}");
+                    Console.WriteLine($"  {nameof(M.Method)}          : {methodName}");
+                    Console.WriteLine($"  {nameof(M.Description)}     : {methodDescription}");
+                    Console.WriteLine($"  {nameof(M.CancelIfFail)}    : {methodCancelIfFail}");
 
                     // TODO: Use Activator.CreateInstance to auto-create appropriate TestMeasurement objects, eliminating below switch.
                     // TODO: Rename TestMeasurement objects to TestMethod objects?

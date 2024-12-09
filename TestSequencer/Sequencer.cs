@@ -47,7 +47,7 @@ namespace TestSequencer {
         [XmlElement(nameof(MI), typeof(MI))]
         [XmlElement(nameof(MP), typeof(MP))]
         [XmlElement(nameof(MT), typeof(MT))]
-        public List<MS> Methods { get; set; }
+        public List<M> Methods { get; set; }
 
         public String AssertionPrior() {
             return $"{TO.DEBUG_ASSERT}{nameof(Assertions.TG_Prior)}{TO.BEGIN}{nameof(Class)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Class)).GetValue(this))}{TO.END}";
@@ -70,23 +70,23 @@ namespace TestSequencer {
         }
         private String Ms() {
             StringBuilder sb = new StringBuilder();
-            foreach (MS ms in Methods) sb.Append($"{ms.Method}{TO.DIVIDER}");
+            foreach (M m in Methods) sb.Append($"{m.Method}{TO.DIVIDER}");
             return TO.EF(sb.Remove(sb.Length - TO.DIVIDER.Length, TO.DIVIDER.Length).ToString()); // Remove trailing TO.DIVIDER.
 
         }
     }
 
-    public abstract class MS { // Method Shared.
+    public abstract class M {
         [XmlAttribute(nameof(Method))] public String Method { get; set; }
         [XmlAttribute(nameof(Description))] public String Description { get; set; }
         [XmlAttribute(nameof(CancelIfFail))] public Boolean CancelIfFail { get; set; }
 
         public String AssertionPrior() {
-            return $"{TO.DEBUG_ASSERT}{nameof(Assertions.MS_Prior)}{TO.BEGIN}{nameof(Method)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Method)).GetValue(this))}{TO.END}";
+            return $"{TO.DEBUG_ASSERT}{nameof(Assertions.M_Prior)}{TO.BEGIN}{nameof(Method)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Method)).GetValue(this))}{TO.END}";
         }
 
         public String AssertionNext() {
-            return $"{TO.DEBUG_ASSERT}{nameof(Assertions.MS_Next)}{TO.BEGIN}{nameof(Method)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Method)).GetValue(this))}{TO.END}";
+            return $"{TO.DEBUG_ASSERT}{nameof(Assertions.M_Next)}{TO.BEGIN}{nameof(Method)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Method)).GetValue(this))}{TO.END}";
         }
 
         private protected String AssertionShared() {
@@ -98,7 +98,7 @@ namespace TestSequencer {
         }
     }
 
-    public class MC : MS, IAssertionCurrent {
+    public class MC : M, IAssertionCurrent {
         [XmlElement(nameof(Parameter))] public List<Parameter> Parameters { get; set; }
 
         public String AssertionCurrent() {
@@ -121,7 +121,7 @@ namespace TestSequencer {
         [XmlAttribute(nameof(Value))] public String Value { get; set; }
     }
 
-    public class MI : MS, IAssertionCurrent {
+    public class MI : M, IAssertionCurrent {
         [XmlAttribute(nameof(LowComparator))] public MI_LowComparator LowComparator { get; set; }
         [XmlAttribute(nameof(Low))] public Double Low { get; set; }
         [XmlAttribute(nameof(High))] public Double High { get; set; }
@@ -153,7 +153,7 @@ namespace TestSequencer {
     public enum MI_Units { NONE, Amperes, Celcius, Farads, Henries, Hertz, Ohms, Seconds, Siemens, Volts, VoltAmperes, Watts }
     public enum MI_UnitSuffix { NONE, AC, DC, Peak, PP, RMS }
 
-    public class MP : MS, IAssertionCurrent {
+    public class MP : M, IAssertionCurrent {
         [XmlAttribute(nameof(Path))] public String Path { get; set; }
         [XmlAttribute(nameof(Executable))] public String Executable { get; set; }
         [XmlAttribute(nameof(Parameters))] public String Parameters { get; set; }
@@ -171,7 +171,7 @@ namespace TestSequencer {
         }
     }
 
-    public class MT : MS, IAssertionCurrent {
+    public class MT : M, IAssertionCurrent {
         [XmlAttribute(nameof(Text))] public String Text { get; set; }
 
         public String AssertionCurrent() {

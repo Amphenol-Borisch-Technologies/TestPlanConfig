@@ -22,17 +22,17 @@ namespace TestSequencer {
                 Console.WriteLine($"{nameof(TG.Description)}: {tg.Description}");
                 Console.WriteLine($"{nameof(TG.CancelIfFail)}: {tg.CancelIfFail}");
                 Console.WriteLine($"{nameof(TG.Independent)}: {tg.Independent}");
-                foreach (MethodShared method in tg.Methods) {
-                    Console.WriteLine($"  {nameof(MethodShared.Method)}: {method.Method}, {nameof(MethodShared.Description)}: {method.Description}, {nameof(MethodShared.CancelIfFail)}: {method.CancelIfFail}");
-                    if (method is MC mc) {
+                foreach (M m in tg.Methods) {
+                    Console.WriteLine($"  {nameof(M.Method)}: {m.Method}, {nameof(M.Description)}: {m.Description}, {nameof(M.CancelIfFail)}: {m.CancelIfFail}");
+                    if (m is MC mc) {
                         foreach (Parameter p in mc.Parameters) {
                             Console.WriteLine($"    {nameof(Parameter)} {nameof(Parameter.Key)}: {p.Key}, {nameof(Parameter.Value)}: {p.Value}");
                         }
-                    } else if (method is MI mi) {
+                    } else if (m is MI mi) {
                         Console.WriteLine($"    {nameof(MI.LowComparator)}: {mi.LowComparator}, {nameof(MI.Low)}: {mi.Low}, {nameof(MI.High)}: {mi.High}, {nameof(MI.HighComparator)}: {mi.HighComparator}, {nameof(MI.FractionalDigits)}: {mi.FractionalDigits}, {nameof(MI.UnitPrefix)}: {mi.UnitPrefix}, {nameof(MI.Units)}: {mi.Units}, {nameof(MI.UnitSuffix)}: {mi.UnitSuffix}");
-                    } else if (method is MP mp) {
+                    } else if (m is MP mp) {
                         Console.WriteLine($"    {nameof(MP.Path)}: {mp.Path}, {nameof(MP.Executable)}: {mp.Executable}, {nameof(MP.Parameters)}: {mp.Parameters}, {nameof(MP.Expected)}: {mp.Expected}");
-                    } else if (method is MT mt) {
+                    } else if (m is MT mt) {
                         Console.WriteLine($"    {nameof(MT.Text)}: {mt.Text}");
                     }
                 }
