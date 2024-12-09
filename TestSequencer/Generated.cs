@@ -18,8 +18,10 @@ namespace T10 {
         
         static string Method1() {
 			Debug.Assert(TO(Namespace: "T10", Description: "Example Test Operation.", TestGroups: "Class1|Class2"));
+			Debug.Assert(TG_Prior(Class: "NONE"));
 			Debug.Assert(TG(Class: "Class1", Description: "Example Test Group.", CancelIfFail: "true", Independent: "true", Methods: "Method1|Method2|Method3|Method4"));
 			Debug.Assert(TG_Next(Class: "Class2"));
+			Debug.Assert(M_Prior(Method: "NONE"));
 			Debug.Assert(MT(Method: "Method1", Description: "Verify Firmware Revision Text.", CancelIfFail: "true", Text: "7.10"));
 			Debug.Assert(M_Next(Method: "Method2"));
 			return String.Empty;
@@ -42,6 +44,7 @@ namespace T10 {
         static string Method4() {
 			Debug.Assert(M_Prior(Method: "Method3"));
 			Debug.Assert(MI(Method: "Method4", Description: "Miscellaneous Interval Measurement.", CancelIfFail: "true", LowComparator: "GT", Low: "1.5", High: "2.5", HighComparator: "LE", FractionalDigits: "2", UnitPrefix: "NONE", Units: "NONE", UnitSuffix: "NONE"));
+			Debug.Assert(M_Next(Method: "NONE"));
 			return String.Empty;
         }
     }
@@ -51,6 +54,8 @@ namespace T10 {
         static string Method5() {
 			Debug.Assert(TG_Prior(Class: "Class1"));
 			Debug.Assert(TG(Class: "Class2", Description: "Rinse and Repeat.", CancelIfFail: "true", Independent: "true", Methods: "Method5|Method6|Method7|Method8"));
+			Debug.Assert(TG_Next(Class: "NONE"));
+			Debug.Assert(M_Prior(Method: "NONE"));
 			Debug.Assert(MC(Method: "Method5", Description: "Custom Power Method.", CancelIfFail: "true"));
 			Debug.Assert(M_Next(Method: "Method6"));
 			return String.Empty;
@@ -73,6 +78,7 @@ namespace T10 {
         static string Method8() {
 			Debug.Assert(M_Prior(Method: "Method7"));
 			Debug.Assert(MT(Method: "Method8", Description: "Verify Firmware Revision Text.", CancelIfFail: "false", Text: "5.29"));
+			Debug.Assert(M_Next(Method: "NONE"));
 			return String.Empty;
         }
     }

@@ -49,11 +49,21 @@ namespace TestSequencer {
 
             if (method == 0) {
                 if (testGroup != 0) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{(to.TestGroups[testGroup - 1]).AssertionPrior()}"));
+                else _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{TO.DEBUG_ASSERT}{nameof(Assertions.TG_Prior)}{TO.BEGIN}{nameof(TG.Class)}{TO.CS}{TO.NONE}{TO.END}"));
+
                 _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionCurrent)to.TestGroups[testGroup]).AssertionCurrent()}"));
+                
                 if (testGroup < to.TestGroups.Count - 1) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{(to.TestGroups[testGroup + 1]).AssertionNext()}"));
-            } else _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{(to.TestGroups[testGroup].Methods[method - 1]).AssertionPrior()}"));
+                else _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{TO.DEBUG_ASSERT}{nameof(Assertions.TG_Next)}{TO.BEGIN}{nameof(TG.Class)}{TO.CS}{TO.NONE}{TO.END}"));
+            } 
+            
+            if (method != 0) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{(to.TestGroups[testGroup].Methods[method - 1]).AssertionPrior()}"));
+            else _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{TO.DEBUG_ASSERT}{nameof(Assertions.M_Prior)}{TO.BEGIN}{nameof(M.Method)}{TO.CS}{TO.NONE}{TO.END}"));
+
             _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionCurrent)to.TestGroups[testGroup].Methods[method]).AssertionCurrent()}"));
+            
             if (method < to.TestGroups[testGroup].Methods.Count - 1) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{(to.TestGroups[testGroup].Methods[method + 1]).AssertionNext()}"));
+            else _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{TO.DEBUG_ASSERT}{nameof(Assertions.M_Next)}{TO.BEGIN}{nameof(M.Method)}{TO.CS}{TO.NONE}{TO.END}"));
 
             _ = memberMethod.Statements.Add(new CodeSnippetStatement("\t\t\treturn String.Empty;"));
             _ = classDeclaration.Members.Add(memberMethod);
