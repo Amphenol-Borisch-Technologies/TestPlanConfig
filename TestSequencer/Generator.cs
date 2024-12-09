@@ -45,11 +45,20 @@ namespace TestSequencer {
                 Attributes = MemberAttributes.Static,
                 ReturnType = new CodeTypeReference(typeof(String))
             };
-            if (testGroup == 0 && method == 0) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionPresent)to).AssertionPresent()}"));
-            if (method == 0) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionPresent)to.TestGroups[testGroup]).AssertionPresent()}"));
-            else if (method < to.TestGroups[testGroup].Methods.Count) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionPresent)to.TestGroups[testGroup]).AssertionPresent()}"));
-            _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionPresent)to.TestGroups[testGroup].Methods[method]).AssertionPresent()}"));
+            if (testGroup == 0 && method == 0) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionCurrent)to).AssertionCurrent()}")); // Add Test Operation assertion.
+
+            if (method == 0) {
+                if (testGroup != 0) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{(to.TestGroups[testGroup - 1]).AssertionNext()}")); // Add prior Test Group assertion.
+                _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionCurrent)to.TestGroups[testGroup]).AssertionCurrent()}")); // Add current Test Group assertion.
+                if (testGroup < to.TestGroups.Count - 1) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{(to.TestGroups[testGroup + 1]).AssertionNext()}")); // Add next Test Group assertion.
+            } else _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{(to.TestGroups[testGroup].Methods[method - 1]).AssertionPrior()}")); // Add prior method assertion.
+
+            _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{((IAssertionCurrent)to.TestGroups[testGroup].Methods[method]).AssertionCurrent()}")); // Add current method assertion.
+
+            if (method < to.TestGroups[testGroup].Methods.Count - 1) _ = memberMethod.Statements.Add(new CodeSnippetStatement($"\t\t\t{(to.TestGroups[testGroup].Methods[method + 1]).AssertionNext()}")); // Add next method assertion.
+
             _ = memberMethod.Statements.Add(new CodeSnippetStatement("\t\t\treturn String.Empty;"));
+            
             _ = classDeclaration.Members.Add(memberMethod);
         }
 
