@@ -13,7 +13,6 @@ namespace T10 {
     using System.Diagnostics;
     using static TestSequencer.Assertions;
     
-    
     internal class Class1 {
         
         static string Method1() {
