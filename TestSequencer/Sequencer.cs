@@ -69,7 +69,7 @@ namespace TestSequencer {
             return TO.EF(sb.Remove(sb.Length - TO.DIVIDER.Length, TO.DIVIDER.Length).ToString()); // Remove trailing TO.DIVIDER.
         }
 
-        public String AssertionNext(Boolean Next=true) { return $"{TO.DEBUG_ASSERT}{nameof(Assertions.TG_Next)}{TO.BEGIN}{nameof(Class)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Class)).GetValue(this))}{TO.END}"; }
+        public String AssertionNext() { return $"{TO.DEBUG_ASSERT}{nameof(Assertions.TG_Next)}{TO.BEGIN}{nameof(Class)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Class)).GetValue(this))}{TO.END}"; }
     }
 
     public abstract class M {
@@ -77,7 +77,7 @@ namespace TestSequencer {
         [XmlAttribute(nameof(Description))] public String Description { get; set; }
         [XmlAttribute(nameof(CancelIfFail))] public Boolean CancelIfFail { get; set; }
         [XmlAttribute(nameof(Event))] public String Event { get; set; } // TODO: Change String to Lib.EVENTS.
-        [XmlAttribute(nameof(MetaData))] public String MetaData { get; set; } // NOTE: data about Event.
+        [XmlAttribute(nameof(EventDetail))] public String EventDetail { get; set; }
         public String AssertionPrior() { return $"{TO.DEBUG_ASSERT}{nameof(Assertions.M_Prior)}{TO.BEGIN}{nameof(Method)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Method)).GetValue(this))}{TO.END}"; }
 
         private protected String AssertionM() {
