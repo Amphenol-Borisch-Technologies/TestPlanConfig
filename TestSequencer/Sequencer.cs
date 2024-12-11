@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using ABT.TestExec.Lib;
 
 namespace TestSequencer {
     public interface IAssertionCurrent { String AssertionCurrent(); }
@@ -76,7 +76,7 @@ namespace TestSequencer {
         [XmlAttribute(nameof(Method))] public String Method { get; set; }
         [XmlAttribute(nameof(Description))] public String Description { get; set; }
         [XmlAttribute(nameof(CancelIfFail))] public Boolean CancelIfFail { get; set; }
-        [XmlAttribute(nameof(Event))] public String Event { get; set; } // TODO: Change String to Lib.EVENTS.
+        [XmlAttribute(nameof(Event))] public EVENTS Event { get; set; }
         [XmlAttribute(nameof(EventDetail))] public String EventDetail { get; set; }
         public String AssertionPrior() { return $"{TO.DEBUG_ASSERT}{nameof(Assertions.M_Prior)}{TO.BEGIN}{nameof(Method)}{TO.CS}{TO.EF(GetType().GetProperty(nameof(Method)).GetValue(this))}{TO.END}"; }
 
