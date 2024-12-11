@@ -73,7 +73,7 @@ namespace TestSequencer {
     }
 
     public abstract class M {
-        [XmlAttribute(nameof(Method))] public String Method { get; set; } 
+        [XmlAttribute(nameof(Method))] public String Method { get; set; }
         [XmlAttribute(nameof(Description))] public String Description { get; set; }
         [XmlAttribute(nameof(CancelIfFail))] public Boolean CancelIfFail { get; set; }
         [XmlAttribute(nameof(Event))] public EVENTS Event { get; set; }
