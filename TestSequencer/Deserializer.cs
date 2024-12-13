@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace TestSequencer {
 
     class Deserializer {
-        static void Main() {
+        static void NotMain() {
             XmlSerializer serializer = new XmlSerializer(typeof(TO));
             using (FileStream fileStream = new FileStream(Properties.Resources.XML_File, FileMode.Open)) {
                 TO to = (TO)serializer.Deserialize(fileStream);

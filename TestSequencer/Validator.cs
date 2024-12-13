@@ -10,7 +10,7 @@ namespace TestSequencer {
         private static XmlReader reader;
 
         [STAThreadAttribute]
-        public static void Main() {
+        public static void NotMain() {
             XmlSchemaSet schemaSet = new XmlSchemaSet();
             schemaSet.Add(null, Properties.Resources.XSD_File);
             XmlReaderSettings settings = new XmlReaderSettings { ValidationType = ValidationType.Schema, Schemas = schemaSet };
