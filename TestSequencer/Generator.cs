@@ -9,7 +9,7 @@ namespace TestSequencer {
 
     public static class Generator {
 
-        public static void NotMain() {
+        public static void Main() {
             TO to;
             using (FileStream fs = new FileStream(Properties.Resources.XML_File, FileMode.Open)) { to = (TO)(new XmlSerializer(typeof(TO))).Deserialize(fs); }
 

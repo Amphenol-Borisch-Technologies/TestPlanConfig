@@ -15,7 +15,7 @@ namespace TestSequencer {
         // - Potentially include external invocations to Keysight VEE or Python executables, if test developer selects these options.
         // - Goal is to automate as much of the routine, standardized test generation as possible.
         [STAThread]
-        public static void Main() {
+        public static void NotMain() {
             XDocument tocf = XDocument.Load(Properties.Resources.XML_File);
             XElement toElement = tocf.Element(nameof(TO));
             String nameSpace = (toElement.Attribute(nameof(TO.Namespace))?.Value);
